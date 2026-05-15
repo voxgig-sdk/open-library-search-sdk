@@ -1,0 +1,568 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Open Library Search API",
+    "description": "Open Library provides an experimental API to search for book data. It can return data for multiple books in a single request, including Work and Edition level information, author IDs, book availability, and offers powerful sorting options.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Open Library",
+      "url": "https://openlibrary.org/dev/docs/api/search"
+    },
+    "license": {
+      "name": "Open Library License",
+      "url": "https://openlibrary.org/terms"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://openlibrary.org",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/search.json": {
+      "get": {
+        "summary": "Search for books",
+        "description": "Search for books using various query parameters. Returns Work level and Edition level information about books.",
+        "operationId": "searchBooks",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The solr query. General search term for books.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "the lord of the rings"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Search by book title",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "the lord of the rings"
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "description": "Search by author name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "tolkien"
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of fields to return from solr. Use * to fetch all fields. Add 'availability' to fetch availability data from archive.org. Can also specify edition fields like 'editions.key,editions.title'.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "key,title,author_name,editions"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort results by various facets such as 'new', 'old', 'random', or 'key'. Default is relevance.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "new",
+                "old",
+                "random",
+                "key",
+                "relevance"
+              ]
+            },
+            "example": "new"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Two letter ISO 639-1 language code. Influences but doesn't exclude search results by preferring editions in this language.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2}$"
+            },
+            "example": "en"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of results to skip for pagination.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return (page size).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination (starts at 1). Use with 'limit' parameter.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "publisher",
+            "in": "query",
+            "description": "Filter by publisher name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Filter by language code (e.g., 'fre' for French, 'eng' for English)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eng"
+          },
+          {
+            "name": "has_fulltext",
+            "in": "query",
+            "description": "Filter for books with full text available",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ebook_access",
+            "in": "query",
+            "description": "Filter by ebook access type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful search response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                },
+                "example": {
+                  "numFound": 629,
+                  "start": 0,
+                  "numFoundExact": true,
+                  "docs": [
+                    {
+                      "key": "/works/OL27448W",
+                      "title": "The Lord of the Rings",
+                      "author_name": [
+                        "J. R. R. Tolkien"
+                      ],
+                      "author_key": [
+                        "OL26320A"
+                      ],
+                      "first_publish_year": 1954,
+                      "cover_i": 258027,
+                      "has_fulltext": true,
+                      "edition_count": 120,
+                      "ia": [
+                        "returnofking00tolk_1",
+                        "lordofrings00tolk_1"
+                      ],
+                      "public_scan_b": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/authors.json": {
+      "get": {
+        "summary": "Search for authors",
+        "description": "Search for authors using query parameters.",
+        "operationId": "searchAuthors",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The search query for author names",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "twain"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of results to skip for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful author search response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "numFound": {
+            "type": "integer",
+            "description": "Total number of documents found"
+          },
+          "start": {
+            "type": "integer",
+            "description": "Starting offset of the results"
+          },
+          "numFoundExact": {
+            "type": "boolean",
+            "description": "Whether the numFound is exact or an estimate"
+          },
+          "docs": {
+            "type": "array",
+            "description": "Array of book documents",
+            "items": {
+              "$ref": "#/components/schemas/BookDocument"
+            }
+          }
+        }
+      },
+      "BookDocument": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Open Library work key",
+            "example": "/works/OL27448W"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the book"
+          },
+          "author_name": {
+            "type": "array",
+            "description": "List of author names",
+            "items": {
+              "type": "string"
+            }
+          },
+          "author_key": {
+            "type": "array",
+            "description": "List of Open Library author keys",
+            "items": {
+              "type": "string"
+            }
+          },
+          "first_publish_year": {
+            "type": "integer",
+            "description": "Year of first publication"
+          },
+          "cover_i": {
+            "type": "integer",
+            "description": "Cover image ID"
+          },
+          "has_fulltext": {
+            "type": "boolean",
+            "description": "Whether full text is available"
+          },
+          "edition_count": {
+            "type": "integer",
+            "description": "Number of editions for this work"
+          },
+          "ia": {
+            "type": "array",
+            "description": "Internet Archive identifiers",
+            "items": {
+              "type": "string"
+            }
+          },
+          "public_scan_b": {
+            "type": "boolean",
+            "description": "Whether public scans are available"
+          },
+          "isbn": {
+            "type": "array",
+            "description": "List of ISBNs",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publisher": {
+            "type": "array",
+            "description": "List of publishers",
+            "items": {
+              "type": "string"
+            }
+          },
+          "language": {
+            "type": "array",
+            "description": "List of language codes",
+            "items": {
+              "type": "string"
+            }
+          },
+          "editions": {
+            "$ref": "#/components/schemas/EditionsResponse",
+            "description": "Nested editions data when fields parameter includes editions"
+          }
+        }
+      },
+      "EditionsResponse": {
+        "type": "object",
+        "properties": {
+          "numFound": {
+            "type": "integer",
+            "description": "Total number of editions found"
+          },
+          "start": {
+            "type": "integer",
+            "description": "Starting offset"
+          },
+          "numFoundExact": {
+            "type": "boolean",
+            "description": "Whether the count is exact"
+          },
+          "docs": {
+            "type": "array",
+            "description": "Array of edition documents",
+            "items": {
+              "$ref": "#/components/schemas/EditionDocument"
+            }
+          }
+        }
+      },
+      "EditionDocument": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Open Library edition key",
+            "example": "/books/OL37239326M"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the edition"
+          },
+          "language": {
+            "type": "array",
+            "description": "Language codes for this edition",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ebook_access": {
+            "type": "string",
+            "description": "Ebook access type (e.g., 'public', 'borrowable')"
+          },
+          "publisher": {
+            "type": "array",
+            "description": "Publishers of this edition",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publish_date": {
+            "type": "string",
+            "description": "Publication date"
+          },
+          "isbn": {
+            "type": "array",
+            "description": "ISBNs for this edition",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AuthorSearchResponse": {
+        "type": "object",
+        "properties": {
+          "numFound": {
+            "type": "integer",
+            "description": "Total number of authors found"
+          },
+          "start": {
+            "type": "integer",
+            "description": "Starting offset"
+          },
+          "numFoundExact": {
+            "type": "boolean",
+            "description": "Whether the count is exact"
+          },
+          "docs": {
+            "type": "array",
+            "description": "Array of author documents",
+            "items": {
+              "$ref": "#/components/schemas/AuthorDocument"
+            }
+          }
+        }
+      },
+      "AuthorDocument": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Open Library author key"
+          },
+          "name": {
+            "type": "string",
+            "description": "Author name"
+          },
+          "birth_date": {
+            "type": "string",
+            "description": "Author birth date"
+          },
+          "death_date": {
+            "type": "string",
+            "description": "Author death date"
+          },
+          "work_count": {
+            "type": "integer",
+            "description": "Number of works by this author"
+          },
+          "top_work": {
+            "type": "string",
+            "description": "Title of top work"
+          },
+          "top_subjects": {
+            "type": "array",
+            "description": "Top subjects associated with this author",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Search",
+      "description": "Search operations for books and authors"
+    }
+  ],
+  "externalDocs": {
+    "description": "Open Library Search API Documentation",
+    "url": "https://openlibrary.org/dev/docs/api/search"
+  }
+}

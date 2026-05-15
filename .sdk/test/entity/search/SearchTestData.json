@@ -1,0 +1,74 @@
+{
+  "existing": {
+    "search": {
+      "SEARCH00": {
+        "author_key": [],
+        "author_name": [],
+        "cover_i": "s8e",
+        "edition": {},
+        "edition_count": "s90",
+        "first_publish_year": "s91",
+        "has_fulltext": true,
+        "ia": [],
+        "isbn": [],
+        "key": "s95",
+        "language": [],
+        "public_scan_b": false,
+        "publisher": [],
+        "title": "s99"
+      },
+      "SEARCH01": {
+        "author_key": [],
+        "author_name": [],
+        "cover_i": "s11a",
+        "edition": {},
+        "edition_count": "s11c",
+        "first_publish_year": "s11d",
+        "has_fulltext": true,
+        "ia": [],
+        "isbn": [],
+        "key": "s121",
+        "language": [],
+        "public_scan_b": false,
+        "publisher": [],
+        "title": "s125"
+      },
+      "SEARCH02": {
+        "author_key": [],
+        "author_name": [],
+        "cover_i": "s1a6",
+        "edition": {},
+        "edition_count": "s1a8",
+        "first_publish_year": "s1a9",
+        "has_fulltext": true,
+        "ia": [],
+        "isbn": [],
+        "key": "s1ad",
+        "language": [],
+        "public_scan_b": false,
+        "publisher": [],
+        "title": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "search": {
+      "search_ref01": {
+        "author_key": [],
+        "author_name": [],
+        "cover_i": "s232",
+        "edition": {},
+        "edition_count": "s234",
+        "first_publish_year": "s235",
+        "has_fulltext": true,
+        "ia": [],
+        "isbn": [],
+        "key": "s239",
+        "language": [],
+        "public_scan_b": false,
+        "publisher": [],
+        "title": "s23d"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "author": {
+      "AUTHOR00": {
+        "birth_date": "s46",
+        "death_date": "s47",
+        "key": "s48",
+        "name": "s49",
+        "top_subject": [],
+        "top_work": "s4b",
+        "work_count": "s4c"
+      },
+      "AUTHOR01": {
+        "birth_date": "s8c",
+        "death_date": "s8d",
+        "key": "s8e",
+        "name": "s8f",
+        "top_subject": [],
+        "top_work": "s91",
+        "work_count": "s92"
+      },
+      "AUTHOR02": {
+        "birth_date": "sd2",
+        "death_date": "sd3",
+        "key": "sd4",
+        "name": "sd5",
+        "top_subject": [],
+        "top_work": "sd7",
+        "work_count": "sd8"
+      }
+    }
+  },
+  "new": {
+    "author": {
+      "author_ref01": {
+        "birth_date": "s118",
+        "death_date": "s119",
+        "key": "s11a",
+        "name": "s11b",
+        "top_subject": [],
+        "top_work": "s11d",
+        "work_count": "s11e"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 2
+  metrics: count: path: 2
+  metrics: count: method: 2
+
+  entity: author: {
+    path: "/search/authors.json": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: search: {
+    path: "/search.json": {
+      op: list: method: *GET
+    }
+  }
+
+}

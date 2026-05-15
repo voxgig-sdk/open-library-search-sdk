@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Open Library"
+        url: "https://openlibrary.org/dev/docs/api/search"
+      }
+      description: "Open Library provides an experimental API to search for book data. It can return data for multiple books in a single request, including Work and Edition level information, author IDs, book availability, and offers powerful sorting options."
+      license: {
+        name: "Open Library License"
+        url: "https://openlibrary.org/terms"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://openlibrary.org"
+        }
+      ]
+      title: "Open Library Search API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

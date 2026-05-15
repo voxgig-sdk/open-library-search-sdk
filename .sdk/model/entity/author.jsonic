@@ -1,0 +1,103 @@
+# Entity: author
+
+main: kit: entity: author: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "birth_date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "death_date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "key"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "top_subject"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "top_work"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "work_count"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "author"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: "twain"
+                kind: "query"
+                name: "q"
+                orig: "q"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/search/authors.json"
+          parts: [
+            "search"
+            "authors.json"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "offset"
+              "q"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
