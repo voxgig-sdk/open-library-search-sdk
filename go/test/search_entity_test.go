@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/open-library-search-sdk"
-	"github.com/voxgig-sdk/open-library-search-sdk/core"
+	sdk "github.com/voxgig-sdk/open-library-search-sdk/go"
+	"github.com/voxgig-sdk/open-library-search-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/open-library-search-sdk/go/utility/struct"
 )
 
 func TestSearchEntity(t *testing.T) {

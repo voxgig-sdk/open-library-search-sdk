@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/open-library-search-sdk"
+	sdk "github.com/voxgig-sdk/open-library-search-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {

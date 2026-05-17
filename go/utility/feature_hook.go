@@ -3,7 +3,7 @@ package utility
 import (
 	"reflect"
 
-	"github.com/voxgig-sdk/open-library-search-sdk/core"
+	"github.com/voxgig-sdk/open-library-search-sdk/go/core"
 )
 
 func featureHookUtil(ctx *core.Context, name string) {

@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/open-library-search-sdk/core"
+	"github.com/voxgig-sdk/open-library-search-sdk/go/core"
 )
 
 type BaseFeature struct {

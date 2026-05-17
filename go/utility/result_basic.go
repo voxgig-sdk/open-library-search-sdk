@@ -3,7 +3,7 @@ package utility
 import (
 	"fmt"
 
-	"github.com/voxgig-sdk/open-library-search-sdk/core"
+	"github.com/voxgig-sdk/open-library-search-sdk/go/core"
 )
 
 func resultBasicUtil(ctx *core.Context) *core.Result {

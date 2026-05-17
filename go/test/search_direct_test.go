@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/open-library-search-sdk"
-	"github.com/voxgig-sdk/open-library-search-sdk/core"
+	sdk "github.com/voxgig-sdk/open-library-search-sdk/go"
+	"github.com/voxgig-sdk/open-library-search-sdk/go/core"
 )
 
 func TestSearchDirect(t *testing.T) {
