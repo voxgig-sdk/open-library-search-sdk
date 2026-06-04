@@ -86,7 +86,6 @@ function author_basic_setup($extra)
         "OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID" => $idmap,
         "OPENLIBRARYSEARCH_TEST_LIVE" => "FALSE",
         "OPENLIBRARYSEARCH_TEST_EXPLAIN" => "FALSE",
-        "OPENLIBRARYSEARCH_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +97,6 @@ function author_basic_setup($extra)
     if ($env["OPENLIBRARYSEARCH_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["OPENLIBRARYSEARCH_APIKEY"],
             ],
             $extra ?? [],
         ]);

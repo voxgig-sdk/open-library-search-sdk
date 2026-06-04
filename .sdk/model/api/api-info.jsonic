@@ -21,8 +21,35 @@ main: {
       ]
       title: "Open Library Search API"
       version: "1.0.0"
+      tagline: "Search the Open Library catalogue for books, works, editions, and authors over a free public HTTP API"
+      homepage: "https://openlibrary.org"
+      docs_url: "https://openlibrary.org/developers/api"
+      license_short: "Open Library data is community-contributed and served by the Internet Archive; check Open Library's terms before redistribution."
+      license_md: `- Open Library is run by the [Internet Archive](https://archive.org), a 501(c)(3) nonprofit.
+- Catalogue data is community-edited; no explicit data licence is published on the homepage.
+- The APIs are intended for open-source and mission-aligned projects and are not a bulk data backend - use the monthly data dumps for bulk needs.
+- Identified clients should send a \`User-Agent\` header including a contact email.`
+      about_md: `[Open Library](https://openlibrary.org) is an open, editable catalogue from the [Internet Archive](https://archive.org) that aims to build a web page for every book ever published. Alongside its public website, it exposes a family of read-only HTTP APIs that let applications search the catalogue and look up works, editions, authors, and covers.
+
+This SDK targets the Search endpoint, which returns book metadata (work and edition identifiers, author identifiers, and availability information) as JSON.
+
+What you get from the API:
+
+- Search books by title via \`GET /search.json?title=\`
+- Search books by author via \`GET /search.json?author=&sort=\`
+- JSON responses with work/edition info, author IDs, and availability data
+
+Operational notes:
+
+- No authentication is required.
+- Default rate limit is roughly 1 request per second; identified clients sending a \`User-Agent\` with a contact email may use up to 3 requests per second.
+- CORS is disabled on the search endpoint, so browser-side calls will need a proxy.
+- For bulk access, use the monthly Open Library data dumps rather than the API.`
+      entity_desc: {
+        author: "Author-related lookups exposed by the Search API; author queries are issued via `GET /search.json?author=` and results include Open Library author identifiers."
+        search: "The book search resource backed by `GET /search.json`, returning works, editions, author IDs, and availability data matching a title or author query."
+      }
+      auth: false
     }
   }
-}
-
 }

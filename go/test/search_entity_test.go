@@ -119,7 +119,6 @@ func searchBasicSetup(extra map[string]any) *entityTestSetup {
 		"OPENLIBRARYSEARCH_TEST_SEARCH_ENTID": idmap,
 		"OPENLIBRARYSEARCH_TEST_LIVE":      "FALSE",
 		"OPENLIBRARYSEARCH_TEST_EXPLAIN":   "FALSE",
-		"OPENLIBRARYSEARCH_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["OPENLIBRARYSEARCH_TEST_SEARCH_ENTID"])
@@ -130,7 +129,6 @@ func searchBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["OPENLIBRARYSEARCH_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["OPENLIBRARYSEARCH_APIKEY"],
 			},
 			extra,
 		})

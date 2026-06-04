@@ -92,7 +92,6 @@ def _search_basic_setup(extra):
         "OPENLIBRARYSEARCH_TEST_SEARCH_ENTID": idmap,
         "OPENLIBRARYSEARCH_TEST_LIVE": "FALSE",
         "OPENLIBRARYSEARCH_TEST_EXPLAIN": "FALSE",
-        "OPENLIBRARYSEARCH_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ def _search_basic_setup(extra):
     if env.get("OPENLIBRARYSEARCH_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("OPENLIBRARYSEARCH_APIKEY"),
             },
             extra or {},
         ])
