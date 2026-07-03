@@ -10,7 +10,7 @@ The PHP SDK for the OpenLibrarySearch API — an entity-oriented client using PH
 
 ## Install
 ```bash
-composer require voxgig/open-library-search-sdk
+composer require voxgig-sdk/open-library-search
 ```
 
 

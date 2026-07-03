@@ -10,7 +10,7 @@ The Lua SDK for the OpenLibrarySearch API — an entity-oriented client using Lu
 
 ## Install
 ```bash
-luarocks install open-library-search-sdk
+luarocks install voxgig-sdk-open-library-search
 ```
 
 If the module is not yet published, add the source directory to

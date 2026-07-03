@@ -10,13 +10,13 @@ The Ruby SDK for the OpenLibrarySearch API — an entity-oriented client using i
 
 ## Install
 ```bash
-gem install open-library-search-sdk
+gem install voxgig-sdk-open-library-search
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "open-library-search-sdk"
+gem "voxgig-sdk-open-library-search"
 ```
 
 Then run:

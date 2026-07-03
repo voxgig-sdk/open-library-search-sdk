@@ -2,9 +2,17 @@ Gem::Specification.new do |spec|
   spec.name          = "voxgig-sdk-open-library-search"
   spec.version       = "0.0.1"
   spec.authors       = ["Voxgig"]
-  spec.summary       = "OpenLibrarySearch SDK for Ruby"
+  spec.summary       = "Unofficial generated Ruby SDK for the Open Library Search public API. Not affiliated with or endorsed by the upstream API provider."
+  spec.description   = "Unofficial generated Ruby SDK for the Open Library Search public API. Not affiliated with or endorsed by the upstream API provider."
   spec.license       = "MIT"
   spec.homepage      = "https://github.com/voxgig-sdk/open-library-search-sdk"
+  spec.metadata      = {
+    "homepage_uri"          => "https://github.com/voxgig-sdk/open-library-search-sdk",
+    "source_code_uri"       => "https://github.com/voxgig-sdk/open-library-search-sdk",
+    "bug_tracker_uri"       => "https://github.com/voxgig-sdk/open-library-search-sdk/issues",
+    "changelog_uri"         => "https://github.com/voxgig-sdk/open-library-search-sdk/blob/main/CHANGELOG.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   spec.files         = Dir["lib/**/*.rb", "*.rb"]
   spec.require_paths = ["."]

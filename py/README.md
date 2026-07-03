@@ -10,7 +10,7 @@ The Python SDK for the OpenLibrarySearch API — an entity-oriented client follo
 
 ## Install
 ```bash
-pip install open-library-search-sdk
+pip install voxgig-sdk-open-library-search
 ```
 
 Or install from source:

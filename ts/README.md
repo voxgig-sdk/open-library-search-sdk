@@ -10,7 +10,7 @@ The TypeScript SDK for the OpenLibrarySearch API — a type-safe, entity-oriente
 
 ## Install
 ```bash
-npm install open-library-search
+npm install @voxgig-sdk/open-library-search
 ```
 ## Tutorial: your first API call
 
