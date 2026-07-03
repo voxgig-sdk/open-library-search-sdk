@@ -63,12 +63,14 @@ function search_direct_setup(mockres)
   local env = runner.env_override({
     ["OPENLIBRARYSEARCH_TEST_SEARCH_ENTID"] = {},
     ["OPENLIBRARYSEARCH_TEST_LIVE"] = "FALSE",
+    ["OPENLIBRARYSEARCH_APIKEY"] = "NONE",
   })
 
   local live = env["OPENLIBRARYSEARCH_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["OPENLIBRARYSEARCH_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

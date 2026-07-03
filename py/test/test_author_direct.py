@@ -61,12 +61,14 @@ def _author_direct_setup(mockres):
     env = runner.env_override({
         "OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID": {},
         "OPENLIBRARYSEARCH_TEST_LIVE": "FALSE",
+        "OPENLIBRARYSEARCH_APIKEY": "NONE",
     })
 
     live = env.get("OPENLIBRARYSEARCH_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("OPENLIBRARYSEARCH_APIKEY"),
         }
         client = OpenLibrarySearchSDK(merged_opts)
         return {

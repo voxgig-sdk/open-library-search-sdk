@@ -68,12 +68,14 @@ function search_direct_setup($mockres)
     $env = Runner::env_override([
         "OPENLIBRARYSEARCH_TEST_SEARCH_ENTID" => [],
         "OPENLIBRARYSEARCH_TEST_LIVE" => "FALSE",
+        "OPENLIBRARYSEARCH_APIKEY" => "NONE",
     ]);
 
     $live = $env["OPENLIBRARYSEARCH_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["OPENLIBRARYSEARCH_APIKEY"],
         ];
         $client = new OpenLibrarySearchSDK($merged_opts);
         return [

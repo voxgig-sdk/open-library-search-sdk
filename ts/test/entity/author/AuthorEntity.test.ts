@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID': idmap,
     'OPEN_LIBRARY_SEARCH_TEST_LIVE': 'FALSE',
     'OPEN_LIBRARY_SEARCH_TEST_EXPLAIN': 'FALSE',
+    'OPEN_LIBRARY_SEARCH_APIKEY': 'NONE',
   })
 
   idmap = env['OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new OpenLibrarySearchSDK(merge([
       {
+        apikey: env.OPEN_LIBRARY_SEARCH_APIKEY,
       },
       extra
     ]))

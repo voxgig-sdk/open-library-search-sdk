@@ -1,27 +1,8 @@
 # OpenLibrarySearch SDK
 
-Search the Open Library catalogue for books, works, editions, and authors over a free public HTTP API
+Open Library Search API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Open Library Search API
-
-[Open Library](https://openlibrary.org) is an open, editable catalogue from the [Internet Archive](https://archive.org) that aims to build a web page for every book ever published. Alongside its public website, it exposes a family of read-only HTTP APIs that let applications search the catalogue and look up works, editions, authors, and covers.
-
-This SDK targets the Search endpoint, which returns book metadata (work and edition identifiers, author identifiers, and availability information) as JSON.
-
-What you get from the API:
-
-- Search books by title via `GET /search.json?title=`
-- Search books by author via `GET /search.json?author=&sort=`
-- JSON responses with work/edition info, author IDs, and availability data
-
-Operational notes:
-
-- No authentication is required.
-- Default rate limit is roughly 1 request per second; identified clients sending a `User-Agent` with a contact email may use up to 3 requests per second.
-- CORS is disabled on the search endpoint, so browser-side calls will need a proxy.
-- For bulk access, use the monthly Open Library data dumps rather than the API.
 
 ## Try it
 
@@ -55,29 +36,31 @@ gem install open-library-search-sdk
 luarocks install open-library-search-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { OpenLibrarySearchSDK } from 'open-library-search'
 
-const client = new OpenLibrarySearchSDK({})
+const client = new OpenLibrarySearchSDK({
+  apikey: process.env.OPEN-LIBRARY-SEARCH_APIKEY,
+})
 
 // List all authors
 const authors = await client.Author().list()
+console.log(authors.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -107,8 +90,8 @@ The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Author** | Author-related lookups exposed by the Search API; author queries are issued via `GET /search.json?author=` and results include Open Library author identifiers. | `/search/authors.json` |
-| **Search** | The book search resource backed by `GET /search.json`, returning works, editions, author IDs, and availability data matching a title or author query. | `/search.json` |
+| **Author** |  | `/search/authors.json` |
+| **Search** |  | `/search.json` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -118,12 +101,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from openlibrarysearch_sdk import OpenLibrarySearchSDK
 
-client = OpenLibrarySearchSDK({})
+client = OpenLibrarySearchSDK({
+    "apikey": os.environ.get("OPEN-LIBRARY-SEARCH_APIKEY"),
+})
 
 # List all authors
-authors, err = client.Author(None).list(None, None)
+authors, err = client.Author().list()
+print(authors)
 ```
 
 ### PHP
@@ -132,10 +119,13 @@ authors, err = client.Author(None).list(None, None)
 <?php
 require_once 'openlibrarysearch_sdk.php';
 
-$client = new OpenLibrarySearchSDK([]);
+$client = new OpenLibrarySearchSDK([
+    "apikey" => getenv("OPEN-LIBRARY-SEARCH_APIKEY"),
+]);
 
 // List all authors
-[$authors, $err] = $client->Author(null)->list(null, null);
+[$authors, $err] = $client->Author()->list();
+print_r($authors);
 ```
 
 ### Golang
@@ -143,10 +133,13 @@ $client = new OpenLibrarySearchSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/open-library-search-sdk/go"
 
-client := sdk.NewOpenLibrarySearchSDK(map[string]any{})
+client := sdk.NewOpenLibrarySearchSDK(map[string]any{
+    "apikey": os.Getenv("OPEN-LIBRARY-SEARCH_APIKEY"),
+})
 
 // List all authors
 authors, err := client.Author(nil).List(nil, nil)
+fmt.Println(authors)
 ```
 
 ### Ruby
@@ -154,10 +147,13 @@ authors, err := client.Author(nil).List(nil, nil)
 ```ruby
 require_relative "OpenLibrarySearch_sdk"
 
-client = OpenLibrarySearchSDK.new({})
+client = OpenLibrarySearchSDK.new({
+  "apikey" => ENV["OPEN-LIBRARY-SEARCH_APIKEY"],
+})
 
 # List all authors
-authors, err = client.Author(nil).list(nil, nil)
+authors, err = client.Author().list
+puts authors
 ```
 
 ### Lua
@@ -165,10 +161,13 @@ authors, err = client.Author(nil).list(nil, nil)
 ```lua
 local sdk = require("open-library-search_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("OPEN-LIBRARY-SEARCH_APIKEY"),
+})
 
 -- List all authors
-local authors, err = client:Author(nil):list(nil, nil)
+local authors, err = client:Author():list()
+print(authors)
 ```
 
 ## Unit testing in offline mode
@@ -187,25 +186,21 @@ const result = await client.Author().load({ id: 'test01' })
 ### Python
 
 ```python
-client = OpenLibrarySearchSDK.test(None, None)
-result, err = client.Author(None).load(
-    {"id": "test01"}, None
-)
+client = OpenLibrarySearchSDK.test()
+result, err = client.Author().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = OpenLibrarySearchSDK::test(null, null);
-[$result, $err] = $client->Author(null)->load(
-    ["id" => "test01"], null
-);
+$client = OpenLibrarySearchSDK::test();
+[$result, $err] = $client->Author()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Author(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -214,19 +209,15 @@ result, err := client.Author(nil).Load(
 ### Ruby
 
 ```ruby
-client = OpenLibrarySearchSDK.test(nil, nil)
-result, err = client.Author(nil).load(
-  { "id" => "test01" }, nil
-)
+client = OpenLibrarySearchSDK.test
+result, err = client.Author().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Author(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Author():load({ id = "test01" })
 ```
 
 ## How it works
@@ -330,16 +321,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Open Library Search API
-
-- Upstream: [https://openlibrary.org](https://openlibrary.org)
-- API docs: [https://openlibrary.org/developers/api](https://openlibrary.org/developers/api)
-
-- Open Library is run by the [Internet Archive](https://archive.org), a 501(c)(3) nonprofit.
-- Catalogue data is community-edited; no explicit data licence is published on the homepage.
-- The APIs are intended for open-source and mission-aligned projects and are not a bulk data backend - use the monthly data dumps for bulk needs.
-- Identified clients should send a `User-Agent` header including a contact email.
 
 ---
 

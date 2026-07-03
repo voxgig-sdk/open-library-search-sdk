@@ -93,12 +93,14 @@ func searchDirectSetup(mockres any) *searchDirectSetupResult {
 	env := envOverride(map[string]any{
 		"OPENLIBRARYSEARCH_TEST_SEARCH_ENTID": map[string]any{},
 		"OPENLIBRARYSEARCH_TEST_LIVE":    "FALSE",
+		"OPENLIBRARYSEARCH_APIKEY":       "NONE",
 	})
 
 	live := env["OPENLIBRARYSEARCH_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["OPENLIBRARYSEARCH_APIKEY"],
 		}
 		client := sdk.NewOpenLibrarySearchSDK(mergedOpts)
 
