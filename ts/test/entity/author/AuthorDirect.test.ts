@@ -82,14 +82,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID': {},
     'OPENLIBRARYSEARCH_TEST_LIVE': 'FALSE',
-    'OPENLIBRARYSEARCH_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.OPENLIBRARYSEARCH_TEST_LIVE
 
   if (live) {
     const client = new OpenLibrarySearchSDK({
-      apikey: env.OPENLIBRARYSEARCH_APIKEY,
     })
 
     let idmap: any = env['OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID']

@@ -244,12 +244,38 @@ end
 
 
 
+-- Idiomatic facade: client:author():list() / client:author():load({ id = ... })
+function OpenLibrarySearchSDK:author(data)
+  local EntityMod = require("entity.author_entity")
+  if data == nil then
+    if self._author == nil then
+      self._author = EntityMod.new(self, nil)
+    end
+    return self._author
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:author() instead.
 function OpenLibrarySearchSDK:Author(data)
   local EntityMod = require("entity.author_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:search():list() / client:search():load({ id = ... })
+function OpenLibrarySearchSDK:search(data)
+  local EntityMod = require("entity.search_entity")
+  if data == nil then
+    if self._search == nil then
+      self._search = EntityMod.new(self, nil)
+    end
+    return self._search
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:search() instead.
 function OpenLibrarySearchSDK:Search(data)
   local EntityMod = require("entity.search_entity")
   return EntityMod.new(self, data)

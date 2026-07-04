@@ -245,11 +245,17 @@ func (sdk *OpenLibrarySearchSDK) Direct(fetchargs map[string]any) (map[string]an
 }
 
 
+// Author returns a Author entity bound to this client.
+// Idiomatic usage: client.Author(nil).List(nil, nil) or
+// client.Author(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OpenLibrarySearchSDK) Author(data map[string]any) OpenLibrarySearchEntity {
 	return NewAuthorEntityFunc(sdk, data)
 }
 
 
+// Search returns a Search entity bound to this client.
+// Idiomatic usage: client.Search(nil).List(nil, nil) or
+// client.Search(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OpenLibrarySearchSDK) Search(data map[string]any) OpenLibrarySearchEntity {
 	return NewSearchEntityFunc(sdk, data)
 }

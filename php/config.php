@@ -20,9 +20,6 @@ class OpenLibrarySearchConfig
             ],
             "options" => [
                 "base" => "https://openlibrary.org",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

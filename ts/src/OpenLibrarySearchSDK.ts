@@ -3,6 +3,8 @@
 import { AuthorEntity } from './entity/AuthorEntity'
 import { SearchEntity } from './entity/SearchEntity'
 
+export type * from './OpenLibrarySearchTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -203,12 +205,28 @@ class OpenLibrarySearchSDK {
 
 
 
+  _author?: AuthorEntity
+
+  // Idiomatic facade: `client.author.list()` / `client.author.load({ id })`.
+  get author(): AuthorEntity {
+    return (this._author ??= new AuthorEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.author` instead. */
   Author(data?: any) {
     const self = this
     return new AuthorEntity(self,data)
   }
 
 
+  _search?: SearchEntity
+
+  // Idiomatic facade: `client.search.list()` / `client.search.load({ id })`.
+  get search(): SearchEntity {
+    return (this._search ??= new SearchEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.search` instead. */
   Search(data?: any) {
     const self = this
     return new SearchEntity(self,data)

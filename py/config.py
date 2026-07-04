@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://openlibrary.org",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },

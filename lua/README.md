@@ -9,12 +9,9 @@ The Lua SDK for the OpenLibrarySearch API — an entity-oriented client using Lu
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-open-library-search
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/open-library-search-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("open-library-search_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("OPEN-LIBRARY-SEARCH_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List authors
 
 ```lua
-local result, err = client:Author():list()
+local result, err = client:author():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:OpenLibrarySearch():load({ id = "test01" })
+local result, err = client:author():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-OPEN-LIBRARY-SEARCH_TEST_LIVE=TRUE
-OPEN-LIBRARY-SEARCH_APIKEY=<your-key>
+OPEN_LIBRARY_SEARCH_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -257,7 +250,7 @@ API path: `/search.json`
 
 ### Author
 
-Create an instance: `const author = client.Author()`
+Create an instance: `const author = client.author`
 
 #### Operations
 
@@ -280,13 +273,13 @@ Create an instance: `const author = client.Author()`
 #### Example: List
 
 ```ts
-const authors = await client.Author().list()
+const authors = await client.author.list()
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.Search()`
+Create an instance: `const search = client.search`
 
 #### Operations
 
@@ -316,7 +309,7 @@ Create an instance: `const search = client.Search()`
 #### Example: List
 
 ```ts
-const searchs = await client.Search().list()
+const searchs = await client.search.list()
 ```
 
 
@@ -391,11 +384,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local author = client:author()
+author:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- author:data_get() now returns the loaded author data
+-- author:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

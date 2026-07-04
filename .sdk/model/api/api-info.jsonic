@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       contact: {
         name: "Open Library"
         url: "https://openlibrary.org/dev/docs/api/search"
