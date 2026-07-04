@@ -31,14 +31,16 @@ from openlibrarysearch_sdk import OpenLibrarySearchSDK
 client = OpenLibrarySearchSDK()
 ```
 
-### 2. List authors
+### 2. List author records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.author.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    authors = client.Author().list({})
+    for author in authors:
+        print(author)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenLibrarySearchSDK.test()
 
-result = client.author.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+author = client.Author().load({"id": "test01"})
+# author contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -163,7 +166,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Author` | `(data) -> AuthorEntity` | Create a Author entity instance. |
+| `Author` | `(data) -> AuthorEntity` | Create an Author entity instance. |
 | `Search` | `(data) -> SearchEntity` | Create a Search entity instance. |
 
 ### Entity interface
@@ -250,7 +253,7 @@ API path: `/search.json`
 
 ### Author
 
-Create an instance: `const author = client.author`
+Create an instance: `author = client.Author()`
 
 #### Operations
 
@@ -272,14 +275,14 @@ Create an instance: `const author = client.author`
 
 #### Example: List
 
-```ts
-const authors = await client.author.list()
+```python
+authors = client.Author().list({})
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `search = client.Search()`
 
 #### Operations
 
@@ -308,8 +311,8 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```python
+searchs = client.Search().list({})
 ```
 
 
@@ -383,7 +386,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-author = client.author
+author = client.Author()
 author.load({"id": "example_id"})
 
 # author.data_get() now returns the loaded author data

@@ -208,26 +208,14 @@ class OpenLibrarySearchSDK
   end
 
 
-  # Idiomatic facade: client.author.list / client.author.load({ "id" => ... })
-  def author
-    require_relative 'entity/author_entity'
-    @author ||= AuthorEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.author instead.
+  # Canonical facade: client.Author.list / client.Author.load({ "id" => ... })
   def Author(data = nil)
     require_relative 'entity/author_entity'
     AuthorEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.search.list / client.search.load({ "id" => ... })
-  def search
-    require_relative 'entity/search_entity'
-    @search ||= SearchEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.search instead.
+  # Canonical facade: client.Search.list / client.Search.load({ "id" => ... })
   def Search(data = nil)
     require_relative 'entity/search_entity'
     SearchEntity.new(self, data)

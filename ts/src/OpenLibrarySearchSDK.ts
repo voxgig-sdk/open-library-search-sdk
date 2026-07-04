@@ -205,28 +205,14 @@ class OpenLibrarySearchSDK {
 
 
 
-  _author?: AuthorEntity
-
-  // Idiomatic facade: `client.author.list()` / `client.author.load({ id })`.
-  get author(): AuthorEntity {
-    return (this._author ??= new AuthorEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.author` instead. */
+  // Entity access: `client.Author().list()` / `client.Author().load({ id })`.
   Author(data?: any) {
     const self = this
     return new AuthorEntity(self,data)
   }
 
 
-  _search?: SearchEntity
-
-  // Idiomatic facade: `client.search.list()` / `client.search.load({ id })`.
-  get search(): SearchEntity {
-    return (this._search ??= new SearchEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.search` instead. */
+  // Entity access: `client.Search().list()` / `client.Search().load({ id })`.
   Search(data?: any) {
     const self = this
     return new SearchEntity(self,data)

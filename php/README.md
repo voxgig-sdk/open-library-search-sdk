@@ -29,18 +29,16 @@ require_once 'openlibrarysearch_sdk.php';
 $client = new OpenLibrarySearchSDK();
 ```
 
-### 2. List authors
+### 2. List author records
 
 ```php
 try {
-    $result = $client->author()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Author records — iterate directly.
+    $authors = $client->Author()->list();
+    foreach ($authors as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -86,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = OpenLibrarySearchSDK::test();
+$client = OpenLibrarySearchSDK::test([
+    "entity" => ["author" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->author()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$author = $client->Author()->load(["id" => "test01"]);
+print_r($author);
 ```
 
 ### Use a custom fetch function
@@ -171,7 +173,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `Author` | `($data): AuthorEntity` | Create a Author entity instance. |
+| `Author` | `($data): AuthorEntity` | Create an Author entity instance. |
 | `Search` | `($data): SearchEntity` | Create a Search entity instance. |
 
 ### Entity interface
@@ -258,7 +260,7 @@ API path: `/search.json`
 
 ### Author
 
-Create an instance: `const author = client.author`
+Create an instance: `$author = $client->Author();`
 
 #### Operations
 
@@ -280,14 +282,15 @@ Create an instance: `const author = client.author`
 
 #### Example: List
 
-```ts
-const authors = await client.author.list()
+```php
+// list() returns an array of Author records (throws on error).
+$authors = $client->Author()->list();
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `$search = $client->Search();`
 
 #### Operations
 
@@ -316,8 +319,9 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```php
+// list() returns an array of Search records (throws on error).
+$searchs = $client->Search()->list();
 ```
 
 
@@ -392,7 +396,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$author = $client->author();
+$author = $client->Author();
 $author->load(["id" => "example_id"]);
 
 // $author->dataGet() now returns the loaded author data

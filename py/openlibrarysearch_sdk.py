@@ -220,41 +220,21 @@ class OpenLibrarySearchSDK:
         }
 
 
-    @property
-    def author(self):
-        """Idiomatic facade: client.author.list() / client.author.load({"id": ...})."""
-        from entity.author_entity import AuthorEntity
-        cached = getattr(self, "_author", None)
-        if cached is None:
-            cached = AuthorEntity(self, None)
-            self._author = cached
-        return cached
-
-    def Author(self, data=None):
-        # Deprecated: use client.author instead.
+    def Author(self, data=None) -> "AuthorEntity":
+        """Entity factory: client.Author().list({}) / client.Author().load({"id": ...})."""
         from entity.author_entity import AuthorEntity
         return AuthorEntity(self, data)
 
 
-    @property
-    def search(self):
-        """Idiomatic facade: client.search.list() / client.search.load({"id": ...})."""
-        from entity.search_entity import SearchEntity
-        cached = getattr(self, "_search", None)
-        if cached is None:
-            cached = SearchEntity(self, None)
-            self._search = cached
-        return cached
-
-    def Search(self, data=None):
-        # Deprecated: use client.search instead.
+    def Search(self, data=None) -> "SearchEntity":
+        """Entity factory: client.Search().list({}) / client.Search().load({"id": ...})."""
         from entity.search_entity import SearchEntity
         return SearchEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "OpenLibrarySearchSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -274,3 +254,10 @@ class OpenLibrarySearchSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.author_entity import AuthorEntity
+    from entity.search_entity import SearchEntity

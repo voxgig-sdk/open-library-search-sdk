@@ -233,10 +233,10 @@ class OpenLibrarySearchSDK
 
     private $_author = null;
 
-    // Idiomatic facade: $client->author()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Author() (PHP method
-    // names are case-insensitive).
-    public function author($data = null)
+    // Canonical facade: $client->Author()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->author()
+    // resolves here too.
+    public function Author($data = null)
     {
         require_once __DIR__ . '/entity/author_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class OpenLibrarySearchSDK
 
     private $_search = null;
 
-    // Idiomatic facade: $client->search()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Search() (PHP method
-    // names are case-insensitive).
-    public function search($data = null)
+    // Canonical facade: $client->Search()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->search()
+    // resolves here too.
+    public function Search($data = null)
     {
         require_once __DIR__ . '/entity/search_entity.php';
         if ($data === null) {

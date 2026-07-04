@@ -87,7 +87,7 @@ same parameters as `direct()`.
 ## AuthorEntity
 
 ```lua
-local author = client:author(nil)
+local author = client:Author(nil)
 ```
 
 ### Fields
@@ -109,7 +109,7 @@ local author = client:author(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:author():list()
+local results, err = client:Author():list()
 ```
 
 ### Common Methods
@@ -145,7 +145,7 @@ Return the entity name.
 ## SearchEntity
 
 ```lua
-local search = client:search(nil)
+local search = client:Search(nil)
 ```
 
 ### Fields
@@ -174,7 +174,7 @@ local search = client:search(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:search():list()
+local results, err = client:Search():list()
 ```
 
 ### Common Methods

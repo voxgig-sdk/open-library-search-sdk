@@ -121,7 +121,7 @@ Alias for `OpenLibrarySearchSDK.test()`.
 ## AuthorEntity
 
 ```ts
-const author = client.author
+const author = client.Author()
 ```
 
 ### Fields
@@ -143,7 +143,7 @@ const author = client.author
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.author.list()
+const results = await client.Author().list()
 ```
 
 ### Common Methods
@@ -177,7 +177,7 @@ Return a copy of the entity options.
 ## SearchEntity
 
 ```ts
-const search = client.search
+const search = client.Search()
 ```
 
 ### Fields
@@ -206,7 +206,7 @@ const search = client.search
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.search.list()
+const results = await client.Search().list()
 ```
 
 ### Common Methods

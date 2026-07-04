@@ -90,7 +90,7 @@ same parameters as `direct()`. Raises on error.
 ## AuthorEntity
 
 ```ruby
-author = client.author
+author = client.Author
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ author = client.author
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.author.list(nil)
+results = client.Author.list(nil)
 ```
 
 ### Common Methods
@@ -148,7 +148,7 @@ Return the entity name.
 ## SearchEntity
 
 ```ruby
-search = client.search
+search = client.Search
 ```
 
 ### Fields
@@ -177,7 +177,7 @@ search = client.search
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.search.list(nil)
+results = client.Search.list(nil)
 ```
 
 ### Common Methods

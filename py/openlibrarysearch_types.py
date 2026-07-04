@@ -4,67 +4,67 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Author:
-    birth_date: Optional[str] = None
-    death_date: Optional[str] = None
-    key: Optional[str] = None
-    name: Optional[str] = None
-    top_subject: Optional[list] = None
-    top_work: Optional[str] = None
-    work_count: Optional[int] = None
+class Author(TypedDict, total=False):
+    birth_date: str
+    death_date: str
+    key: str
+    name: str
+    top_subject: list
+    top_work: str
+    work_count: int
 
 
-@dataclass
-class AuthorListMatch:
-    birth_date: Optional[str] = None
-    death_date: Optional[str] = None
-    key: Optional[str] = None
-    name: Optional[str] = None
-    top_subject: Optional[list] = None
-    top_work: Optional[str] = None
-    work_count: Optional[int] = None
+class AuthorListMatch(TypedDict, total=False):
+    birth_date: str
+    death_date: str
+    key: str
+    name: str
+    top_subject: list
+    top_work: str
+    work_count: int
 
 
-@dataclass
-class Search:
-    author_key: Optional[list] = None
-    author_name: Optional[list] = None
-    cover_i: Optional[int] = None
-    edition: Optional[dict] = None
-    edition_count: Optional[int] = None
-    first_publish_year: Optional[int] = None
-    has_fulltext: Optional[bool] = None
-    ia: Optional[list] = None
-    isbn: Optional[list] = None
-    key: Optional[str] = None
-    language: Optional[list] = None
-    public_scan_b: Optional[bool] = None
-    publisher: Optional[list] = None
-    title: Optional[str] = None
+class Search(TypedDict, total=False):
+    author_key: list
+    author_name: list
+    cover_i: int
+    edition: dict
+    edition_count: int
+    first_publish_year: int
+    has_fulltext: bool
+    ia: list
+    isbn: list
+    key: str
+    language: list
+    public_scan_b: bool
+    publisher: list
+    title: str
 
 
-@dataclass
-class SearchListMatch:
-    author_key: Optional[list] = None
-    author_name: Optional[list] = None
-    cover_i: Optional[int] = None
-    edition: Optional[dict] = None
-    edition_count: Optional[int] = None
-    first_publish_year: Optional[int] = None
-    has_fulltext: Optional[bool] = None
-    ia: Optional[list] = None
-    isbn: Optional[list] = None
-    key: Optional[str] = None
-    language: Optional[list] = None
-    public_scan_b: Optional[bool] = None
-    publisher: Optional[list] = None
-    title: Optional[str] = None
-
+class SearchListMatch(TypedDict, total=False):
+    author_key: list
+    author_name: list
+    cover_i: int
+    edition: dict
+    edition_count: int
+    first_publish_year: int
+    has_fulltext: bool
+    ia: list
+    isbn: list
+    key: str
+    language: list
+    public_scan_b: bool
+    publisher: list
+    title: str
