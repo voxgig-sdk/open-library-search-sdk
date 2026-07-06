@@ -8,7 +8,7 @@ Complete API reference for the OpenLibrarySearch Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'open-library-search_sdk'
+require_relative 'OpenLibrarySearch_sdk'
 
 client = OpenLibrarySearchSDK.new(options)
 ```
@@ -97,22 +97,22 @@ author = client.Author
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | ``$STRING`` | No |  |
-| `death_date` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `top_subject` | ``$ARRAY`` | No |  |
-| `top_work` | ``$STRING`` | No |  |
-| `work_count` | ``$INTEGER`` | No |  |
+| `birth_date` | `String` | No |  |
+| `death_date` | `String` | No |  |
+| `key` | `String` | No |  |
+| `name` | `String` | No |  |
+| `top_subject` | `Array` | No |  |
+| `top_work` | `String` | No |  |
+| `work_count` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Author.list(nil)
+results = client.Author.list
 ```
 
 ### Common Methods
@@ -155,29 +155,29 @@ search = client.Search
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | ``$ARRAY`` | No |  |
-| `author_name` | ``$ARRAY`` | No |  |
-| `cover_i` | ``$INTEGER`` | No |  |
-| `edition` | ``$OBJECT`` | No |  |
-| `edition_count` | ``$INTEGER`` | No |  |
-| `first_publish_year` | ``$INTEGER`` | No |  |
-| `has_fulltext` | ``$BOOLEAN`` | No |  |
-| `ia` | ``$ARRAY`` | No |  |
-| `isbn` | ``$ARRAY`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `language` | ``$ARRAY`` | No |  |
-| `public_scan_b` | ``$BOOLEAN`` | No |  |
-| `publisher` | ``$ARRAY`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author_key` | `Array` | No |  |
+| `author_name` | `Array` | No |  |
+| `cover_i` | `Integer` | No |  |
+| `edition` | `Hash` | No |  |
+| `edition_count` | `Integer` | No |  |
+| `first_publish_year` | `Integer` | No |  |
+| `has_fulltext` | `Boolean` | No |  |
+| `ia` | `Array` | No |  |
+| `isbn` | `Array` | No |  |
+| `key` | `String` | No |  |
+| `language` | `Array` | No |  |
+| `public_scan_b` | `Boolean` | No |  |
+| `publisher` | `Array` | No |  |
+| `title` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Search.list(nil)
+results = client.Search.list
 ```
 
 ### Common Methods

@@ -4,6 +4,8 @@
 
 The Ruby SDK for the OpenLibrarySearch API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Author` — with named operations (`list`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,11 +37,38 @@ begin
   # list returns an Array of Author records — iterate directly.
   authors = client.Author.list
   authors.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["birth_date"]}"
   end
 rescue => err
   warn "list failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  authors = client.Author.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -60,7 +89,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -83,16 +114,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = OpenLibrarySearchSDK.test({
-  "entity" => { "author" => { "test01" => { "id" => "test01" } } },
-})
+client = OpenLibrarySearchSDK.test
 
-# load returns the bare mock record (raises on error).
-author = client.Author.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+author = client.Author.list()
 puts author
 ```
 
@@ -178,11 +206,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -267,13 +291,13 @@ Create an instance: `author = client.Author`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `birth_date` | ``$STRING`` |  |
-| `death_date` | ``$STRING`` |  |
-| `key` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `top_subject` | ``$ARRAY`` |  |
-| `top_work` | ``$STRING`` |  |
-| `work_count` | ``$INTEGER`` |  |
+| `birth_date` | `String` |  |
+| `death_date` | `String` |  |
+| `key` | `String` |  |
+| `name` | `String` |  |
+| `top_subject` | `Array` |  |
+| `top_work` | `String` |  |
+| `work_count` | `Integer` |  |
 
 #### Example: List
 
@@ -297,20 +321,20 @@ Create an instance: `search = client.Search`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author_key` | ``$ARRAY`` |  |
-| `author_name` | ``$ARRAY`` |  |
-| `cover_i` | ``$INTEGER`` |  |
-| `edition` | ``$OBJECT`` |  |
-| `edition_count` | ``$INTEGER`` |  |
-| `first_publish_year` | ``$INTEGER`` |  |
-| `has_fulltext` | ``$BOOLEAN`` |  |
-| `ia` | ``$ARRAY`` |  |
-| `isbn` | ``$ARRAY`` |  |
-| `key` | ``$STRING`` |  |
-| `language` | ``$ARRAY`` |  |
-| `public_scan_b` | ``$BOOLEAN`` |  |
-| `publisher` | ``$ARRAY`` |  |
-| `title` | ``$STRING`` |  |
+| `author_key` | `Array` |  |
+| `author_name` | `Array` |  |
+| `cover_i` | `Integer` |  |
+| `edition` | `Hash` |  |
+| `edition_count` | `Integer` |  |
+| `first_publish_year` | `Integer` |  |
+| `has_fulltext` | `Boolean` |  |
+| `ia` | `Array` |  |
+| `isbn` | `Array` |  |
+| `key` | `String` |  |
+| `language` | `Array` |  |
+| `public_scan_b` | `Boolean` |  |
+| `publisher` | `Array` |  |
+| `title` | `String` |  |
 
 #### Example: List
 
@@ -320,12 +344,16 @@ searchs = client.Search.list
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -342,8 +370,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -387,14 +416,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 author = client.Author
-author.load({ "id" => "example_id" })
+author.list()
 
-# author.data_get now returns the loaded author data
+# author.data_get now returns the author data from the last list
 # author.match_get returns the last match criteria
 ```
 

@@ -8,7 +8,7 @@ Complete API reference for the OpenLibrarySearch PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/open-library-search_sdk.php';
+require_once __DIR__ . '/openlibrarysearch_sdk.php';
 
 $client = new OpenLibrarySearchSDK($options);
 ```
@@ -49,11 +49,11 @@ Create a new `AuthorEntity` instance. Pass `null` for no initial data.
 
 Create a new `SearchEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): OpenLibrarySearchUtility`
 
 Return a copy of the SDK utility object.
 
@@ -96,39 +96,39 @@ $author = $client->Author();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | ``$STRING`` | No |  |
-| `death_date` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `top_subject` | ``$ARRAY`` | No |  |
-| `top_work` | ``$STRING`` | No |  |
-| `work_count` | ``$INTEGER`` | No |  |
+| `birth_date` | `string` | No |  |
+| `death_date` | `string` | No |  |
+| `key` | `string` | No |  |
+| `name` | `string` | No |  |
+| `top_subject` | `array` | No |  |
+| `top_work` | `string` | No |  |
+| `work_count` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Author()->list([]);
+$results = $client->Author()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -137,7 +137,7 @@ Set the entity match criteria.
 Create a new `AuthorEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -154,46 +154,46 @@ $search = $client->Search();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | ``$ARRAY`` | No |  |
-| `author_name` | ``$ARRAY`` | No |  |
-| `cover_i` | ``$INTEGER`` | No |  |
-| `edition` | ``$OBJECT`` | No |  |
-| `edition_count` | ``$INTEGER`` | No |  |
-| `first_publish_year` | ``$INTEGER`` | No |  |
-| `has_fulltext` | ``$BOOLEAN`` | No |  |
-| `ia` | ``$ARRAY`` | No |  |
-| `isbn` | ``$ARRAY`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `language` | ``$ARRAY`` | No |  |
-| `public_scan_b` | ``$BOOLEAN`` | No |  |
-| `publisher` | ``$ARRAY`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author_key` | `array` | No |  |
+| `author_name` | `array` | No |  |
+| `cover_i` | `int` | No |  |
+| `edition` | `array` | No |  |
+| `edition_count` | `int` | No |  |
+| `first_publish_year` | `int` | No |  |
+| `has_fulltext` | `bool` | No |  |
+| `ia` | `array` | No |  |
+| `isbn` | `array` | No |  |
+| `key` | `string` | No |  |
+| `language` | `array` | No |  |
+| `public_scan_b` | `bool` | No |  |
+| `publisher` | `array` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Search()->list([]);
+$results = $client->Search()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -202,7 +202,7 @@ Set the entity match criteria.
 Create a new `SearchEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

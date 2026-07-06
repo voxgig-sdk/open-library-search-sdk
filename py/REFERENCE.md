@@ -8,7 +8,7 @@ Complete API reference for the OpenLibrarySearch Python SDK.
 ### Constructor
 
 ```python
-from open-library-search_sdk import OpenLibrarySearchSDK
+from openlibrarysearch_sdk import OpenLibrarySearchSDK
 
 client = OpenLibrarySearchSDK(options)
 ```
@@ -91,22 +91,22 @@ author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | ``$STRING`` | No |  |
-| `death_date` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `top_subject` | ``$ARRAY`` | No |  |
-| `top_work` | ``$STRING`` | No |  |
-| `work_count` | ``$INTEGER`` | No |  |
+| `birth_date` | `str` | No |  |
+| `death_date` | `str` | No |  |
+| `key` | `str` | No |  |
+| `name` | `str` | No |  |
+| `top_subject` | `list` | No |  |
+| `top_work` | `str` | No |  |
+| `work_count` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Author().list({})
+results = client.Author().list()
 for author in results:
     print(author)
 ```
@@ -150,29 +150,29 @@ search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | ``$ARRAY`` | No |  |
-| `author_name` | ``$ARRAY`` | No |  |
-| `cover_i` | ``$INTEGER`` | No |  |
-| `edition` | ``$OBJECT`` | No |  |
-| `edition_count` | ``$INTEGER`` | No |  |
-| `first_publish_year` | ``$INTEGER`` | No |  |
-| `has_fulltext` | ``$BOOLEAN`` | No |  |
-| `ia` | ``$ARRAY`` | No |  |
-| `isbn` | ``$ARRAY`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `language` | ``$ARRAY`` | No |  |
-| `public_scan_b` | ``$BOOLEAN`` | No |  |
-| `publisher` | ``$ARRAY`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author_key` | `list` | No |  |
+| `author_name` | `list` | No |  |
+| `cover_i` | `int` | No |  |
+| `edition` | `dict` | No |  |
+| `edition_count` | `int` | No |  |
+| `first_publish_year` | `int` | No |  |
+| `has_fulltext` | `bool` | No |  |
+| `ia` | `list` | No |  |
+| `isbn` | `list` | No |  |
+| `key` | `str` | No |  |
+| `language` | `list` | No |  |
+| `public_scan_b` | `bool` | No |  |
+| `publisher` | `list` | No |  |
+| `title` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Search().list({})
+results = client.Search().list()
 for search in results:
     print(search)
 ```

@@ -128,13 +128,13 @@ const author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | ``$STRING`` | No |  |
-| `death_date` | ``$STRING`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `top_subject` | ``$ARRAY`` | No |  |
-| `top_work` | ``$STRING`` | No |  |
-| `work_count` | ``$INTEGER`` | No |  |
+| `birth_date` | `string` | No |  |
+| `death_date` | `string` | No |  |
+| `key` | `string` | No |  |
+| `name` | `string` | No |  |
+| `top_subject` | `any[]` | No |  |
+| `top_work` | `string` | No |  |
+| `work_count` | `number` | No |  |
 
 ### Operations
 
@@ -184,20 +184,20 @@ const search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | ``$ARRAY`` | No |  |
-| `author_name` | ``$ARRAY`` | No |  |
-| `cover_i` | ``$INTEGER`` | No |  |
-| `edition` | ``$OBJECT`` | No |  |
-| `edition_count` | ``$INTEGER`` | No |  |
-| `first_publish_year` | ``$INTEGER`` | No |  |
-| `has_fulltext` | ``$BOOLEAN`` | No |  |
-| `ia` | ``$ARRAY`` | No |  |
-| `isbn` | ``$ARRAY`` | No |  |
-| `key` | ``$STRING`` | No |  |
-| `language` | ``$ARRAY`` | No |  |
-| `public_scan_b` | ``$BOOLEAN`` | No |  |
-| `publisher` | ``$ARRAY`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author_key` | `any[]` | No |  |
+| `author_name` | `any[]` | No |  |
+| `cover_i` | `number` | No |  |
+| `edition` | `Record<string, any>` | No |  |
+| `edition_count` | `number` | No |  |
+| `first_publish_year` | `number` | No |  |
+| `has_fulltext` | `boolean` | No |  |
+| `ia` | `any[]` | No |  |
+| `isbn` | `any[]` | No |  |
+| `key` | `string` | No |  |
+| `language` | `any[]` | No |  |
+| `public_scan_b` | `boolean` | No |  |
+| `publisher` | `any[]` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 

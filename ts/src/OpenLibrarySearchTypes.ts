@@ -15,7 +15,15 @@ export interface Author {
   work_count?: number
 }
 
-export type AuthorListMatch = Partial<Author>
+export interface AuthorListMatch {
+  birth_date?: string
+  death_date?: string
+  key?: string
+  name?: string
+  top_subject?: any[]
+  top_work?: string
+  work_count?: number
+}
 
 export interface Search {
   author_key?: any[]
@@ -34,5 +42,20 @@ export interface Search {
   title?: string
 }
 
-export type SearchListMatch = Partial<Search>
+export interface SearchListMatch {
+  author_key?: any[]
+  author_name?: any[]
+  cover_i?: number
+  edition?: Record<string, any>
+  edition_count?: number
+  first_publish_year?: number
+  has_fulltext?: boolean
+  ia?: any[]
+  isbn?: any[]
+  key?: string
+  language?: any[]
+  public_scan_b?: boolean
+  publisher?: any[]
+  title?: string
+}
 

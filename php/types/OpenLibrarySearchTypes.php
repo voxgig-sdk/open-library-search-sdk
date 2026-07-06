@@ -24,7 +24,7 @@ class Author
     public ?int $work_count = null;
 }
 
-/** Match filter for Author#list (any subset of Author fields). */
+/** Request payload for Author#list. */
 class AuthorListMatch
 {
     public ?string $birth_date = null;
@@ -55,7 +55,7 @@ class Search
     public ?string $title = null;
 }
 
-/** Match filter for Search#list (any subset of Search fields). */
+/** Request payload for Search#list. */
 class SearchListMatch
 {
     public ?array $author_key = null;

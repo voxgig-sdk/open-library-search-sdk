@@ -221,13 +221,13 @@ class OpenLibrarySearchSDK:
 
 
     def Author(self, data=None) -> "AuthorEntity":
-        """Entity factory: client.Author().list({}) / client.Author().load({"id": ...})."""
+        """Entity factory: client.Author().list() / client.Author().load({"id": ...})."""
         from entity.author_entity import AuthorEntity
         return AuthorEntity(self, data)
 
 
     def Search(self, data=None) -> "SearchEntity":
-        """Entity factory: client.Search().list({}) / client.Search().load({"id": ...})."""
+        """Entity factory: client.Search().list() / client.Search().load({"id": ...})."""
         from entity.search_entity import SearchEntity
         return SearchEntity(self, data)
 

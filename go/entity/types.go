@@ -19,8 +19,7 @@ type Author struct {
 	WorkCount *int `json:"work_count,omitempty"`
 }
 
-// AuthorListMatch mirrors the author fields as an all-optional match
-// filter (Go analog of Partial<Author>).
+// AuthorListMatch is the typed request payload for Author.ListTyped.
 type AuthorListMatch struct {
 	BirthDate *string `json:"birth_date,omitempty"`
 	DeathDate *string `json:"death_date,omitempty"`
@@ -49,8 +48,7 @@ type Search struct {
 	Title *string `json:"title,omitempty"`
 }
 
-// SearchListMatch mirrors the search fields as an all-optional match
-// filter (Go analog of Partial<Search>).
+// SearchListMatch is the typed request payload for Search.ListTyped.
 type SearchListMatch struct {
 	AuthorKey *[]any `json:"author_key,omitempty"`
 	AuthorName *[]any `json:"author_name,omitempty"`
