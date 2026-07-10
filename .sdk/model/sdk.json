@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -545,14 +542,17 @@
           "name": "Open Library License",
           "url": "https://openlibrary.org/terms"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://openlibrary.org"
           }
         ],
+        "summary": "Open Library provides an experimental API to search for book data.",
         "title": "Open Library Search API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://openlibrary.org/dev/docs/api/search"
       },
       "option": {},
       "target": {
@@ -605,6 +605,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -655,6 +658,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
