@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- OpenLibrarySearch SDK exists test
 
 local sdk = require("open-library-search_sdk")
 
