@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# OpenLibrarySearch SDK exists test
 
 import pytest
 from openlibrarysearch_sdk import OpenLibrarySearchSDK

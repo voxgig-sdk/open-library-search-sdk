@@ -101,7 +101,7 @@ author = client.Author
 | `death_date` | `String` | No |  |
 | `key` | `String` | No |  |
 | `name` | `String` | No |  |
-| `top_subject` | `Array` | No |  |
+| `top_subjects` | `Array` | No |  |
 | `top_work` | `String` | No |  |
 | `work_count` | `Integer` | No |  |
 
@@ -158,8 +158,8 @@ search = client.Search
 | `author_key` | `Array` | No |  |
 | `author_name` | `Array` | No |  |
 | `cover_i` | `Integer` | No |  |
-| `edition` | `Hash` | No |  |
 | `edition_count` | `Integer` | No |  |
+| `editions` | `Hash` | No |  |
 | `first_publish_year` | `Integer` | No |  |
 | `has_fulltext` | `Boolean` | No |  |
 | `ia` | `Array` | No |  |

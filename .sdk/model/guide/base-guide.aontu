@@ -8,12 +8,14 @@ guide: {
   entity: author: {
     path: "/search/authors.json": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.docs`")|top
     }
   }
 
   entity: search: {
     path: "/search.json": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.docs`")|top
     }
   }
 

@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from openlibrarysearch_sdk.utility.voxgig_struct import voxgig_struct as vs
 from openlibrarysearch_sdk import OpenLibrarySearchSDK
-from core import helpers
+from openlibrarysearch_sdk.core import helpers
 from test import runner
 
 
@@ -58,11 +58,11 @@ def _author_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID": {},
-        "OPENLIBRARYSEARCH_TEST_LIVE": "FALSE",
+        "OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID": {},
+        "OPEN_LIBRARY_SEARCH_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("OPENLIBRARYSEARCH_TEST_LIVE") == "TRUE"
+    live = env.get("OPEN_LIBRARY_SEARCH_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

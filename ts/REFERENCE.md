@@ -132,7 +132,7 @@ const author = client.Author()
 | `death_date` | `string` | No |  |
 | `key` | `string` | No |  |
 | `name` | `string` | No |  |
-| `top_subject` | `any[]` | No |  |
+| `top_subjects` | `any[]` | No |  |
 | `top_work` | `string` | No |  |
 | `work_count` | `number` | No |  |
 
@@ -187,8 +187,8 @@ const search = client.Search()
 | `author_key` | `any[]` | No |  |
 | `author_name` | `any[]` | No |  |
 | `cover_i` | `number` | No |  |
-| `edition` | `Record<string, any>` | No |  |
 | `edition_count` | `number` | No |  |
+| `editions` | `Record<string, any>` | No |  |
 | `first_publish_year` | `number` | No |  |
 | `has_fulltext` | `boolean` | No |  |
 | `ia` | `any[]` | No |  |

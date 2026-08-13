@@ -124,7 +124,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OpenLibrarySearchSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 author = client.Author().list()
 # author contains the mock response record
 ```
@@ -221,7 +222,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -247,7 +248,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | `death_date` |  |
 | `key` |  |
 | `name` |  |
-| `top_subject` |  |
+| `top_subjects` |  |
 | `top_work` |  |
 | `work_count` |  |
 
@@ -262,8 +263,8 @@ API path: `/search/authors.json`
 | `author_key` |  |
 | `author_name` |  |
 | `cover_i` |  |
-| `edition` |  |
 | `edition_count` |  |
+| `editions` |  |
 | `first_publish_year` |  |
 | `has_fulltext` |  |
 | `ia` |  |
@@ -301,7 +302,7 @@ Create an instance: `author = client.Author()`
 | `death_date` | `str` |  |
 | `key` | `str` |  |
 | `name` | `str` |  |
-| `top_subject` | `list` |  |
+| `top_subjects` | `list` |  |
 | `top_work` | `str` |  |
 | `work_count` | `int` |  |
 
@@ -329,8 +330,8 @@ Create an instance: `search = client.Search()`
 | `author_key` | `list` |  |
 | `author_name` | `list` |  |
 | `cover_i` | `int` |  |
-| `edition` | `dict` |  |
 | `edition_count` | `int` |  |
+| `editions` | `dict` |  |
 | `first_publish_year` | `int` |  |
 | `has_fulltext` | `bool` |  |
 | `ia` | `list` |  |

@@ -66,11 +66,11 @@ function search_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "OPENLIBRARYSEARCH_TEST_SEARCH_ENTID" => [],
-        "OPENLIBRARYSEARCH_TEST_LIVE" => "FALSE",
+        "OPEN_LIBRARY_SEARCH_TEST_SEARCH_ENTID" => [],
+        "OPEN_LIBRARY_SEARCH_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["OPENLIBRARYSEARCH_TEST_LIVE"] === "TRUE";
+    $live = $env["OPEN_LIBRARY_SEARCH_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

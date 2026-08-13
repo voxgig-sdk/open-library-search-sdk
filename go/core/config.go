@@ -55,7 +55,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "top_subject",
+						"name": "top_subjects",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 4,
@@ -114,6 +114,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/search/authors.json",
 								"parts": []any{
@@ -129,12 +130,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.docs`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -166,16 +166,16 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "edition",
+						"name": "edition_count",
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$INTEGER`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "edition_count",
+						"name": "editions",
 						"req": false,
-						"type": "`$INTEGER`",
+						"type": "`$OBJECT`",
 						"index$": 4,
 					},
 					map[string]any{
@@ -368,6 +368,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/search.json",
 								"parts": []any{
@@ -392,12 +393,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.docs`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{

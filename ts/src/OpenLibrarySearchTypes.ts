@@ -10,7 +10,7 @@ export interface Author {
   death_date?: string
   key?: string
   name?: string
-  top_subject?: any[]
+  top_subjects?: any[]
   top_work?: string
   work_count?: number
 }
@@ -20,7 +20,7 @@ export interface AuthorListMatch {
   death_date?: string
   key?: string
   name?: string
-  top_subject?: any[]
+  top_subjects?: any[]
   top_work?: string
   work_count?: number
 }
@@ -29,8 +29,8 @@ export interface Search {
   author_key?: any[]
   author_name?: any[]
   cover_i?: number
-  edition?: Record<string, any>
   edition_count?: number
+  editions?: Record<string, any>
   first_publish_year?: number
   has_fulltext?: boolean
   ia?: any[]
@@ -46,8 +46,8 @@ export interface SearchListMatch {
   author_key?: any[]
   author_name?: any[]
   cover_i?: number
-  edition?: Record<string, any>
   edition_count?: number
+  editions?: Record<string, any>
   first_publish_year?: number
   has_fulltext?: boolean
   ia?: any[]

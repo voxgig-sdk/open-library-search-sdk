@@ -26,7 +26,7 @@ main: kit: entity: author: {
       type: "`$STRING`"
     }
     {
-      name: "top_subject"
+      name: "top_subjects"
       req: false
       type: "`$ARRAY`"
     }
@@ -91,7 +91,7 @@ main: kit: entity: author: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.docs`"
           }
         }
       ]

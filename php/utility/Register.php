@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ OpenLibrarySearchUtility::setRegistrar(function (OpenLibrarySearchUtility $u): v
     $u->prepare_params = [OpenLibrarySearchPrepareParams::class, 'call'];
     $u->prepare_path = [OpenLibrarySearchPreparePath::class, 'call'];
     $u->prepare_query = [OpenLibrarySearchPrepareQuery::class, 'call'];
+    $u->graphql_body = [OpenLibrarySearchGraphql::class, 'body'];
+    $u->graphql_errors = [OpenLibrarySearchGraphql::class, 'errors'];
     $u->result_basic = [OpenLibrarySearchResultBasic::class, 'call'];
     $u->result_body = [OpenLibrarySearchResultBody::class, 'call'];
     $u->result_headers = [OpenLibrarySearchResultHeaders::class, 'call'];

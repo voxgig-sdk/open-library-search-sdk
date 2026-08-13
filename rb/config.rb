@@ -56,7 +56,7 @@ module OpenLibrarySearchConfig
             },
             {
               "active" => true,
-              "name" => "top_subject",
+              "name" => "top_subjects",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 4,
@@ -115,6 +115,7 @@ module OpenLibrarySearchConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/search/authors.json",
                   "parts" => [
@@ -130,7 +131,7 @@ module OpenLibrarySearchConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.docs`",
                   },
                   "index$" => 0,
                 },
@@ -167,16 +168,16 @@ module OpenLibrarySearchConfig
             },
             {
               "active" => true,
-              "name" => "edition",
+              "name" => "edition_count",
               "req" => false,
-              "type" => "`$OBJECT`",
+              "type" => "`$INTEGER`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "edition_count",
+              "name" => "editions",
               "req" => false,
-              "type" => "`$INTEGER`",
+              "type" => "`$OBJECT`",
               "index$" => 4,
             },
             {
@@ -369,6 +370,7 @@ module OpenLibrarySearchConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/search.json",
                   "parts" => [
@@ -393,7 +395,7 @@ module OpenLibrarySearchConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.docs`",
                   },
                   "index$" => 0,
                 },

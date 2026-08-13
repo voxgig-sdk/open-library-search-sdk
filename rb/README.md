@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = OpenLibrarySearchSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 author = client.Author.list()
 puts author
 ```
@@ -241,7 +242,7 @@ returns a result `Hash` with these keys:
 | `death_date` |  |
 | `key` |  |
 | `name` |  |
-| `top_subject` |  |
+| `top_subjects` |  |
 | `top_work` |  |
 | `work_count` |  |
 
@@ -256,8 +257,8 @@ API path: `/search/authors.json`
 | `author_key` |  |
 | `author_name` |  |
 | `cover_i` |  |
-| `edition` |  |
 | `edition_count` |  |
+| `editions` |  |
 | `first_publish_year` |  |
 | `has_fulltext` |  |
 | `ia` |  |
@@ -295,7 +296,7 @@ Create an instance: `author = client.Author`
 | `death_date` | `String` |  |
 | `key` | `String` |  |
 | `name` | `String` |  |
-| `top_subject` | `Array` |  |
+| `top_subjects` | `Array` |  |
 | `top_work` | `String` |  |
 | `work_count` | `Integer` |  |
 
@@ -324,8 +325,8 @@ Create an instance: `search = client.Search`
 | `author_key` | `Array` |  |
 | `author_name` | `Array` |  |
 | `cover_i` | `Integer` |  |
-| `edition` | `Hash` |  |
 | `edition_count` | `Integer` |  |
+| `editions` | `Hash` |  |
 | `first_publish_year` | `Integer` |  |
 | `has_fulltext` | `Boolean` |  |
 | `ia` | `Array` |  |

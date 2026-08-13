@@ -23,8 +23,8 @@ module OpenLibrarySearchTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("OPENLIBRARYSEARCH_TEST_LIVE")
-    override = getenv("OPENLIBRARYSEARCH_TEST_OVERRIDE")
+    live = getenv("OPEN_LIBRARY_SEARCH_TEST_LIVE")
+    override = getenv("OPEN_LIBRARY_SEARCH_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module OpenLibrarySearchTestRunner
       end
     end
 
-    explain = getenv("OPENLIBRARYSEARCH_TEST_EXPLAIN")
-    m["OPENLIBRARYSEARCH_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("OPEN_LIBRARY_SEARCH_TEST_EXPLAIN")
+    m["OPEN_LIBRARY_SEARCH_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

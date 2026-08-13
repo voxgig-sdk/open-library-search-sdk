@@ -219,9 +219,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local author, err = client:Author():load()
+    local author, err = client:Author():list()
     if err then error(err) end
-    -- author is the loaded record
+    -- author is the record list
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -236,7 +236,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `death_date` |  |
 | `key` |  |
 | `name` |  |
-| `top_subject` |  |
+| `top_subjects` |  |
 | `top_work` |  |
 | `work_count` |  |
 
@@ -251,8 +251,8 @@ API path: `/search/authors.json`
 | `author_key` |  |
 | `author_name` |  |
 | `cover_i` |  |
-| `edition` |  |
 | `edition_count` |  |
+| `editions` |  |
 | `first_publish_year` |  |
 | `has_fulltext` |  |
 | `ia` |  |
@@ -290,7 +290,7 @@ Create an instance: `local author = client:Author(nil)`
 | `death_date` | `string` |  |
 | `key` | `string` |  |
 | `name` | `string` |  |
-| `top_subject` | `table` |  |
+| `top_subjects` | `table` |  |
 | `top_work` | `string` |  |
 | `work_count` | `number` |  |
 
@@ -318,8 +318,8 @@ Create an instance: `local search = client:Search(nil)`
 | `author_key` | `table` |  |
 | `author_name` | `table` |  |
 | `cover_i` | `number` |  |
-| `edition` | `table` |  |
 | `edition_count` | `number` |  |
+| `editions` | `table` |  |
 | `first_publish_year` | `number` |  |
 | `has_fulltext` | `boolean` |  |
 | `ia` | `table` |  |

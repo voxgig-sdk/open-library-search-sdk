@@ -100,7 +100,7 @@ $author = $client->Author();
 | `death_date` | `string` | No |  |
 | `key` | `string` | No |  |
 | `name` | `string` | No |  |
-| `top_subject` | `array` | No |  |
+| `top_subjects` | `array` | No |  |
 | `top_work` | `string` | No |  |
 | `work_count` | `int` | No |  |
 
@@ -157,8 +157,8 @@ $search = $client->Search();
 | `author_key` | `array` | No |  |
 | `author_name` | `array` | No |  |
 | `cover_i` | `int` | No |  |
-| `edition` | `array` | No |  |
 | `edition_count` | `int` | No |  |
+| `editions` | `array` | No |  |
 | `first_publish_year` | `int` | No |  |
 | `has_fulltext` | `bool` | No |  |
 | `ia` | `array` | No |  |

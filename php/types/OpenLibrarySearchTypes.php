@@ -19,7 +19,7 @@ class Author
     public ?string $death_date = null;
     public ?string $key = null;
     public ?string $name = null;
-    public ?array $top_subject = null;
+    public ?array $top_subjects = null;
     public ?string $top_work = null;
     public ?int $work_count = null;
 }
@@ -31,7 +31,7 @@ class AuthorListMatch
     public ?string $death_date = null;
     public ?string $key = null;
     public ?string $name = null;
-    public ?array $top_subject = null;
+    public ?array $top_subjects = null;
     public ?string $top_work = null;
     public ?int $work_count = null;
 }
@@ -42,8 +42,8 @@ class Search
     public ?array $author_key = null;
     public ?array $author_name = null;
     public ?int $cover_i = null;
-    public ?array $edition = null;
     public ?int $edition_count = null;
+    public ?array $editions = null;
     public ?int $first_publish_year = null;
     public ?bool $has_fulltext = null;
     public ?array $ia = null;
@@ -61,8 +61,8 @@ class SearchListMatch
     public ?array $author_key = null;
     public ?array $author_name = null;
     public ?int $cover_i = null;
-    public ?array $edition = null;
     public ?int $edition_count = null;
+    public ?array $editions = null;
     public ?int $first_publish_year = null;
     public ?bool $has_fulltext = null;
     public ?array $ia = null;

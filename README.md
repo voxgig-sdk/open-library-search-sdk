@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = OpenLibrarySearchSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = OpenLibrarySearchSDK.test({
+  entity: {
+    author: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const authors = await client.Author().list()
-// authors is an array of bare Author records populated with mock data
+// authors is an array of Author entities, populated with mock data
+// — call authors[0].data() for the record itself
 console.log(authors)
 ```
 
@@ -110,7 +119,7 @@ import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search'
 
 const client = new OpenLibrarySearchSDK()
 
-// List all authors (returns Author[])
+// List all authors (returns AuthorEntity[] — .data() for the record)
 const authors = await client.Author().list()
 for (const author of authors) {
   console.log(author)
@@ -344,6 +353,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://openlibrary.org/dev/docs/api/search](https://openlibrary.org/dev/docs/api/search)
 

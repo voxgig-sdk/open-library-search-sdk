@@ -265,7 +265,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"death_date"` |  |
 | `"key"` |  |
 | `"name"` |  |
-| `"top_subject"` |  |
+| `"top_subjects"` |  |
 | `"top_work"` |  |
 | `"work_count"` |  |
 
@@ -280,8 +280,8 @@ API path: `/search/authors.json`
 | `"author_key"` |  |
 | `"author_name"` |  |
 | `"cover_i"` |  |
-| `"edition"` |  |
 | `"edition_count"` |  |
+| `"editions"` |  |
 | `"first_publish_year"` |  |
 | `"has_fulltext"` |  |
 | `"ia"` |  |
@@ -319,7 +319,7 @@ Create an instance: `author := client.Author(nil)`
 | `death_date` | `string` |  |
 | `key` | `string` |  |
 | `name` | `string` |  |
-| `top_subject` | `[]any` |  |
+| `top_subjects` | `[]any` |  |
 | `top_work` | `string` |  |
 | `work_count` | `int` |  |
 
@@ -351,8 +351,8 @@ Create an instance: `search := client.Search(nil)`
 | `author_key` | `[]any` |  |
 | `author_name` | `[]any` |  |
 | `cover_i` | `int` |  |
-| `edition` | `map[string]any` |  |
 | `edition_count` | `int` |  |
+| `editions` | `map[string]any` |  |
 | `first_publish_year` | `int` |  |
 | `has_fulltext` | `bool` |  |
 | `ia` | `[]any` |  |

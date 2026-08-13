@@ -125,7 +125,8 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = OpenLibrarySearchSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $author = $client->Author()->list();
 print_r($author);
 ```
@@ -225,7 +226,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -251,7 +252,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `death_date` |  |
 | `key` |  |
 | `name` |  |
-| `top_subject` |  |
+| `top_subjects` |  |
 | `top_work` |  |
 | `work_count` |  |
 
@@ -266,8 +267,8 @@ API path: `/search/authors.json`
 | `author_key` |  |
 | `author_name` |  |
 | `cover_i` |  |
-| `edition` |  |
 | `edition_count` |  |
+| `editions` |  |
 | `first_publish_year` |  |
 | `has_fulltext` |  |
 | `ia` |  |
@@ -305,7 +306,7 @@ Create an instance: `$author = $client->Author();`
 | `death_date` | `string` |  |
 | `key` | `string` |  |
 | `name` | `string` |  |
-| `top_subject` | `array` |  |
+| `top_subjects` | `array` |  |
 | `top_work` | `string` |  |
 | `work_count` | `int` |  |
 
@@ -334,8 +335,8 @@ Create an instance: `$search = $client->Search();`
 | `author_key` | `array` |  |
 | `author_name` | `array` |  |
 | `cover_i` | `int` |  |
-| `edition` | `array` |  |
 | `edition_count` | `int` |  |
+| `editions` | `array` |  |
 | `first_publish_year` | `int` |  |
 | `has_fulltext` | `bool` |  |
 | `ia` | `array` |  |

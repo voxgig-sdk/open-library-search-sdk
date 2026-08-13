@@ -22,7 +22,7 @@
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] top_subject
+# @!attribute [rw] top_subjects
 #   @return [Array, nil]
 #
 # @!attribute [rw] top_work
@@ -35,7 +35,7 @@ Author = Struct.new(
   :death_date,
   :key,
   :name,
-  :top_subject,
+  :top_subjects,
   :top_work,
   :work_count,
   keyword_init: true
@@ -55,7 +55,7 @@ Author = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] top_subject
+# @!attribute [rw] top_subjects
 #   @return [Array, nil]
 #
 # @!attribute [rw] top_work
@@ -68,7 +68,7 @@ AuthorListMatch = Struct.new(
   :death_date,
   :key,
   :name,
-  :top_subject,
+  :top_subjects,
   :top_work,
   :work_count,
   keyword_init: true
@@ -85,11 +85,11 @@ AuthorListMatch = Struct.new(
 # @!attribute [rw] cover_i
 #   @return [Integer, nil]
 #
-# @!attribute [rw] edition
-#   @return [Hash, nil]
-#
 # @!attribute [rw] edition_count
 #   @return [Integer, nil]
+#
+# @!attribute [rw] editions
+#   @return [Hash, nil]
 #
 # @!attribute [rw] first_publish_year
 #   @return [Integer, nil]
@@ -121,8 +121,8 @@ Search = Struct.new(
   :author_key,
   :author_name,
   :cover_i,
-  :edition,
   :edition_count,
+  :editions,
   :first_publish_year,
   :has_fulltext,
   :ia,
@@ -146,11 +146,11 @@ Search = Struct.new(
 # @!attribute [rw] cover_i
 #   @return [Integer, nil]
 #
-# @!attribute [rw] edition
-#   @return [Hash, nil]
-#
 # @!attribute [rw] edition_count
 #   @return [Integer, nil]
+#
+# @!attribute [rw] editions
+#   @return [Hash, nil]
 #
 # @!attribute [rw] first_publish_year
 #   @return [Integer, nil]
@@ -182,8 +182,8 @@ SearchListMatch = Struct.new(
   :author_key,
   :author_name,
   :cover_i,
-  :edition,
   :edition_count,
+  :editions,
   :first_publish_year,
   :has_fulltext,
   :ia,

@@ -11,7 +11,7 @@
 ---@field death_date? string
 ---@field key? string
 ---@field name? string
----@field top_subject? table
+---@field top_subjects? table
 ---@field top_work? string
 ---@field work_count? number
 
@@ -20,7 +20,7 @@
 ---@field death_date? string
 ---@field key? string
 ---@field name? string
----@field top_subject? table
+---@field top_subjects? table
 ---@field top_work? string
 ---@field work_count? number
 
@@ -28,8 +28,8 @@
 ---@field author_key? table
 ---@field author_name? table
 ---@field cover_i? number
----@field edition? table
 ---@field edition_count? number
+---@field editions? table
 ---@field first_publish_year? number
 ---@field has_fulltext? boolean
 ---@field ia? table
@@ -44,8 +44,8 @@
 ---@field author_key? table
 ---@field author_name? table
 ---@field cover_i? number
----@field edition? table
 ---@field edition_count? number
+---@field editions? table
 ---@field first_publish_year? number
 ---@field has_fulltext? boolean
 ---@field ia? table

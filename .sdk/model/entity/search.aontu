@@ -21,14 +21,14 @@ main: kit: entity: search: {
       type: "`$INTEGER`"
     }
     {
-      name: "edition"
-      req: false
-      type: "`$OBJECT`"
-    }
-    {
       name: "edition_count"
       req: false
       type: "`$INTEGER`"
+    }
+    {
+      name: "editions"
+      req: false
+      type: "`$OBJECT`"
     }
     {
       name: "first_publish_year"
@@ -212,7 +212,7 @@ main: kit: entity: search: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.docs`"
           }
         }
       ]

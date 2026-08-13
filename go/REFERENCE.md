@@ -106,7 +106,7 @@ fmt.Println(author.GetName()) // "author"
 | `death_date` | `string` | No |  |
 | `key` | `string` | No |  |
 | `name` | `string` | No |  |
-| `top_subject` | `[]any` | No |  |
+| `top_subjects` | `[]any` | No |  |
 | `top_work` | `string` | No |  |
 | `work_count` | `int` | No |  |
 
@@ -162,8 +162,8 @@ fmt.Println(search.GetName()) // "search"
 | `author_key` | `[]any` | No |  |
 | `author_name` | `[]any` | No |  |
 | `cover_i` | `int` | No |  |
-| `edition` | `map[string]any` | No |  |
 | `edition_count` | `int` | No |  |
+| `editions` | `map[string]any` | No |  |
 | `first_publish_year` | `int` | No |  |
 | `has_fulltext` | `bool` | No |  |
 | `ia` | `[]any` | No |  |

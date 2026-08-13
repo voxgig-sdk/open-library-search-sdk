@@ -16,11 +16,11 @@
 import pytest
 
 from openlibrarysearch_sdk import OpenLibrarySearchSDK
-from core.error import OpenLibrarySearchError
-from core.result import OpenLibrarySearchResult
-from core.response import OpenLibrarySearchResponse
-from core.spec import OpenLibrarySearchSpec
-from feature.base_feature import OpenLibrarySearchBaseFeature
+from openlibrarysearch_sdk.core.error import OpenLibrarySearchError
+from openlibrarysearch_sdk.core.result import OpenLibrarySearchResult
+from openlibrarysearch_sdk.core.response import OpenLibrarySearchResponse
+from openlibrarysearch_sdk.core.spec import OpenLibrarySearchSpec
+from openlibrarysearch_sdk.feature.base_feature import OpenLibrarySearchBaseFeature
 
 
 def _client():

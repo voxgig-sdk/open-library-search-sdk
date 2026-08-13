@@ -35,7 +35,9 @@ const client = new OpenLibrarySearchSDK()
 
 ### 2. List author records
 
-`list()` resolves to an array of Author objects — iterate it directly:
+`list()` resolves to an array of Author ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const authors = await client.Author().list()
@@ -120,7 +122,8 @@ Create a mock client for unit testing — no server required:
 const client = OpenLibrarySearchSDK.test()
 
 const author = await client.Author().list()
-// author is a bare entity populated with mock response data
+// author is the entity, populated with mock response data
+// — call author.data() for the record itself
 console.log(author)
 ```
 
@@ -289,7 +292,7 @@ The `prepare()` method returns:
 | `death_date` |  |
 | `key` |  |
 | `name` |  |
-| `top_subject` |  |
+| `top_subjects` |  |
 | `top_work` |  |
 | `work_count` |  |
 
@@ -304,8 +307,8 @@ API path: `/search/authors.json`
 | `author_key` |  |
 | `author_name` |  |
 | `cover_i` |  |
-| `edition` |  |
 | `edition_count` |  |
+| `editions` |  |
 | `first_publish_year` |  |
 | `has_fulltext` |  |
 | `ia` |  |
@@ -343,7 +346,7 @@ Create an instance: `const author = client.Author()`
 | `death_date` | `string` |  |
 | `key` | `string` |  |
 | `name` | `string` |  |
-| `top_subject` | `any[]` |  |
+| `top_subjects` | `any[]` |  |
 | `top_work` | `string` |  |
 | `work_count` | `number` |  |
 
@@ -371,8 +374,8 @@ Create an instance: `const search = client.Search()`
 | `author_key` | `any[]` |  |
 | `author_name` | `any[]` |  |
 | `cover_i` | `number` |  |
-| `edition` | `Record<string, any>` |  |
 | `edition_count` | `number` |  |
+| `editions` | `Record<string, any>` |  |
 | `first_publish_year` | `number` |  |
 | `has_fulltext` | `boolean` |  |
 | `ia` | `any[]` |  |

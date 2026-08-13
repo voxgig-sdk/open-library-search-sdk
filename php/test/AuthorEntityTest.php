@@ -72,7 +72,7 @@ class AuthorEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -117,22 +117,22 @@ function author_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID");
+    $entid_env_raw = getenv("OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID" => $idmap,
-        "OPENLIBRARYSEARCH_TEST_LIVE" => "FALSE",
-        "OPENLIBRARYSEARCH_TEST_EXPLAIN" => "FALSE",
+        "OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID" => $idmap,
+        "OPEN_LIBRARY_SEARCH_TEST_LIVE" => "FALSE",
+        "OPEN_LIBRARY_SEARCH_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["OPENLIBRARYSEARCH_TEST_AUTHOR_ENTID"]);
+        $env["OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["OPENLIBRARYSEARCH_TEST_LIVE"] === "TRUE") {
+    if ($env["OPEN_LIBRARY_SEARCH_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -141,13 +141,13 @@ function author_basic_setup($extra)
         $client = new OpenLibrarySearchSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["OPENLIBRARYSEARCH_TEST_LIVE"] === "TRUE";
+    $live = $env["OPEN_LIBRARY_SEARCH_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["OPENLIBRARYSEARCH_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["OPEN_LIBRARY_SEARCH_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

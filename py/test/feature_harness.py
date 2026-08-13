@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import OpenLibrarySearchControl
-from core.error import OpenLibrarySearchError
-from core.result import OpenLibrarySearchResult
-from core.spec import OpenLibrarySearchSpec
+from openlibrarysearch_sdk.config import make_config
+from openlibrarysearch_sdk.features import _make_feature
+from openlibrarysearch_sdk.core.control import OpenLibrarySearchControl
+from openlibrarysearch_sdk.core.error import OpenLibrarySearchError
+from openlibrarysearch_sdk.core.result import OpenLibrarySearchResult
+from openlibrarysearch_sdk.core.spec import OpenLibrarySearchSpec
 
 
 # True when this SDK was generated with the named feature.

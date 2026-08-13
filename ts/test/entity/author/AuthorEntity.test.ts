@@ -26,8 +26,8 @@ import {
 describe('AuthorEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when OPENLIBRARYSEARCH_TEST_LIVE=TRUE.
-  afterEach(liveDelay('OPENLIBRARYSEARCH_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when OPEN_LIBRARY_SEARCH_TEST_LIVE=TRUE.
+  afterEach(liveDelay('OPEN_LIBRARY_SEARCH_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = OpenLibrarySearchSDK.test()
@@ -63,7 +63,7 @@ describe('AuthorEntity', async () => {
     const author_ref01_ent = client.Author()
     const author_ref01_match: any = {}
 
-    const author_ref01_list = await author_ref01_ent.list(author_ref01_match)
+    const author_ref01_list = (await author_ref01_ent.list(author_ref01_match)).map((e: any) => e.data())
 
 
   })
