@@ -15,7 +15,7 @@ require_relative "../OpenLibrarySearch_sdk"
 module OpenLibrarySearchFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = OpenLibrarySearchConfig.make_config["feature"]
+    f = OpenLibrarySearchConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

@@ -28,7 +28,7 @@ class OpenLibrarySearchSDK
     utility = OpenLibrarySearchUtility.new
     @_utility = utility
 
-    config = OpenLibrarySearchConfig.make_config
+    config = OpenLibrarySearchConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

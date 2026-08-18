@@ -40,7 +40,7 @@ class OpenLibrarySearchSDK
         $utility = new OpenLibrarySearchUtility();
         $this->_utility = $utility;
 
-        $config = OpenLibrarySearchConfig::make_config();
+        $config = OpenLibrarySearchConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
