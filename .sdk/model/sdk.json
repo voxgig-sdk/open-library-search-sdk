@@ -36,42 +36,49 @@
               "active": true,
               "name": "birth_date",
               "req": false,
+              "short": "Author birth date",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "death_date",
               "req": false,
+              "short": "Author death date",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "key",
               "req": false,
+              "short": "Open Library author key",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Author name",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "top_subjects",
               "req": false,
+              "short": "Top subjects associated with this author",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "top_work",
               "req": false,
+              "short": "Title of top work",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "work_count",
               "req": false,
+              "short": "Number of works by this author",
               "type": "`$INTEGER`"
             }
           ],
@@ -150,84 +157,98 @@
               "active": true,
               "name": "author_key",
               "req": false,
+              "short": "List of Open Library author keys",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "author_name",
               "req": false,
+              "short": "List of author names",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "cover_i",
               "req": false,
+              "short": "Cover image ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "edition_count",
               "req": false,
+              "short": "Number of editions for this work",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "editions",
               "req": false,
+              "short": "Nested editions data when fields parameter includes editions",
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "first_publish_year",
               "req": false,
+              "short": "Year of first publication",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "has_fulltext",
               "req": false,
+              "short": "Whether full text is available",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "ia",
               "req": false,
+              "short": "Internet Archive identifiers",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "isbn",
               "req": false,
+              "short": "List of ISBNs",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "key",
               "req": false,
+              "short": "Open Library work key",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "language",
               "req": false,
+              "short": "List of language codes",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "public_scan_b",
               "req": false,
+              "short": "Whether public scans are available",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "publisher",
               "req": false,
+              "short": "List of publishers",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "title",
               "req": false,
+              "short": "Title of the book",
               "type": "`$STRING`"
             }
           ],

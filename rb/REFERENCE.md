@@ -97,13 +97,13 @@ author = client.Author
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | `String` | No |  |
-| `death_date` | `String` | No |  |
-| `key` | `String` | No |  |
-| `name` | `String` | No |  |
-| `top_subjects` | `Array` | No |  |
-| `top_work` | `String` | No |  |
-| `work_count` | `Integer` | No |  |
+| `birth_date` | `String` | No | Author birth date |
+| `death_date` | `String` | No | Author death date |
+| `key` | `String` | No | Open Library author key |
+| `name` | `String` | No | Author name |
+| `top_subjects` | `Array` | No | Top subjects associated with this author |
+| `top_work` | `String` | No | Title of top work |
+| `work_count` | `Integer` | No | Number of works by this author |
 
 ### Operations
 
@@ -155,20 +155,20 @@ search = client.Search
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | `Array` | No |  |
-| `author_name` | `Array` | No |  |
-| `cover_i` | `Integer` | No |  |
-| `edition_count` | `Integer` | No |  |
-| `editions` | `Hash` | No |  |
-| `first_publish_year` | `Integer` | No |  |
-| `has_fulltext` | `Boolean` | No |  |
-| `ia` | `Array` | No |  |
-| `isbn` | `Array` | No |  |
-| `key` | `String` | No |  |
-| `language` | `Array` | No |  |
-| `public_scan_b` | `Boolean` | No |  |
-| `publisher` | `Array` | No |  |
-| `title` | `String` | No |  |
+| `author_key` | `Array` | No | List of Open Library author keys |
+| `author_name` | `Array` | No | List of author names |
+| `cover_i` | `Integer` | No | Cover image ID |
+| `edition_count` | `Integer` | No | Number of editions for this work |
+| `editions` | `Hash` | No | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `Integer` | No | Year of first publication |
+| `has_fulltext` | `Boolean` | No | Whether full text is available |
+| `ia` | `Array` | No | Internet Archive identifiers |
+| `isbn` | `Array` | No | List of ISBNs |
+| `key` | `String` | No | Open Library work key |
+| `language` | `Array` | No | List of language codes |
+| `public_scan_b` | `Boolean` | No | Whether public scans are available |
+| `publisher` | `Array` | No | List of publishers |
+| `title` | `String` | No | Title of the book |
 
 ### Operations
 

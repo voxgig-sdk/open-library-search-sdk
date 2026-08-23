@@ -91,13 +91,13 @@ author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | `str` | No |  |
-| `death_date` | `str` | No |  |
-| `key` | `str` | No |  |
-| `name` | `str` | No |  |
-| `top_subjects` | `list` | No |  |
-| `top_work` | `str` | No |  |
-| `work_count` | `int` | No |  |
+| `birth_date` | `str` | No | Author birth date |
+| `death_date` | `str` | No | Author death date |
+| `key` | `str` | No | Open Library author key |
+| `name` | `str` | No | Author name |
+| `top_subjects` | `list` | No | Top subjects associated with this author |
+| `top_work` | `str` | No | Title of top work |
+| `work_count` | `int` | No | Number of works by this author |
 
 ### Operations
 
@@ -150,20 +150,20 @@ search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | `list` | No |  |
-| `author_name` | `list` | No |  |
-| `cover_i` | `int` | No |  |
-| `edition_count` | `int` | No |  |
-| `editions` | `dict` | No |  |
-| `first_publish_year` | `int` | No |  |
-| `has_fulltext` | `bool` | No |  |
-| `ia` | `list` | No |  |
-| `isbn` | `list` | No |  |
-| `key` | `str` | No |  |
-| `language` | `list` | No |  |
-| `public_scan_b` | `bool` | No |  |
-| `publisher` | `list` | No |  |
-| `title` | `str` | No |  |
+| `author_key` | `list` | No | List of Open Library author keys |
+| `author_name` | `list` | No | List of author names |
+| `cover_i` | `int` | No | Cover image ID |
+| `edition_count` | `int` | No | Number of editions for this work |
+| `editions` | `dict` | No | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `int` | No | Year of first publication |
+| `has_fulltext` | `bool` | No | Whether full text is available |
+| `ia` | `list` | No | Internet Archive identifiers |
+| `isbn` | `list` | No | List of ISBNs |
+| `key` | `str` | No | Open Library work key |
+| `language` | `list` | No | List of language codes |
+| `public_scan_b` | `bool` | No | Whether public scans are available |
+| `publisher` | `list` | No | List of publishers |
+| `title` | `str` | No | Title of the book |
 
 ### Operations
 

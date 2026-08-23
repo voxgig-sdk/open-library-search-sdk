@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "OpenLibrarySearch",
+			"slug": "open-library-search",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -34,30 +37,37 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "birth_date",
+						"short": "Author birth date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "death_date",
+						"short": "Author death date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "key",
+						"short": "Open Library author key",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Author name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "top_subjects",
+						"short": "Top subjects associated with this author",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "top_work",
+						"short": "Title of top work",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "work_count",
+						"short": "Number of works by this author",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -124,58 +134,72 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "author_key",
+						"short": "List of Open Library author keys",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "author_name",
+						"short": "List of author names",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "cover_i",
+						"short": "Cover image ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "edition_count",
+						"short": "Number of editions for this work",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "editions",
+						"short": "Nested editions data when fields parameter includes editions",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "first_publish_year",
+						"short": "Year of first publication",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "has_fulltext",
+						"short": "Whether full text is available",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "ia",
+						"short": "Internet Archive identifiers",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "isbn",
+						"short": "List of ISBNs",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "key",
+						"short": "Open Library work key",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "language",
+						"short": "List of language codes",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "public_scan_b",
+						"short": "Whether public scans are available",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "publisher",
+						"short": "List of publishers",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "title",
+						"short": "Title of the book",
 						"type": "`$STRING`",
 					},
 				},

@@ -94,13 +94,13 @@ local author = client:Author(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | `string` | No |  |
-| `death_date` | `string` | No |  |
-| `key` | `string` | No |  |
-| `name` | `string` | No |  |
-| `top_subjects` | `table` | No |  |
-| `top_work` | `string` | No |  |
-| `work_count` | `number` | No |  |
+| `birth_date` | `string` | No | Author birth date |
+| `death_date` | `string` | No | Author death date |
+| `key` | `string` | No | Open Library author key |
+| `name` | `string` | No | Author name |
+| `top_subjects` | `table` | No | Top subjects associated with this author |
+| `top_work` | `string` | No | Title of top work |
+| `work_count` | `number` | No | Number of works by this author |
 
 ### Operations
 
@@ -152,20 +152,20 @@ local search = client:Search(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | `table` | No |  |
-| `author_name` | `table` | No |  |
-| `cover_i` | `number` | No |  |
-| `edition_count` | `number` | No |  |
-| `editions` | `table` | No |  |
-| `first_publish_year` | `number` | No |  |
-| `has_fulltext` | `boolean` | No |  |
-| `ia` | `table` | No |  |
-| `isbn` | `table` | No |  |
-| `key` | `string` | No |  |
-| `language` | `table` | No |  |
-| `public_scan_b` | `boolean` | No |  |
-| `publisher` | `table` | No |  |
-| `title` | `string` | No |  |
+| `author_key` | `table` | No | List of Open Library author keys |
+| `author_name` | `table` | No | List of author names |
+| `cover_i` | `number` | No | Cover image ID |
+| `edition_count` | `number` | No | Number of editions for this work |
+| `editions` | `table` | No | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `number` | No | Year of first publication |
+| `has_fulltext` | `boolean` | No | Whether full text is available |
+| `ia` | `table` | No | Internet Archive identifiers |
+| `isbn` | `table` | No | List of ISBNs |
+| `key` | `string` | No | Open Library work key |
+| `language` | `table` | No | List of language codes |
+| `public_scan_b` | `boolean` | No | Whether public scans are available |
+| `publisher` | `table` | No | List of publishers |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 

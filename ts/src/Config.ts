@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'OpenLibrarySearch',
+        slug: "open-library-search",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -59,30 +70,37 @@ class Config {
       "fields": [
         {
           "name": "birth_date",
+          "short": "Author birth date",
           "type": "`$STRING`"
         },
         {
           "name": "death_date",
+          "short": "Author death date",
           "type": "`$STRING`"
         },
         {
           "name": "key",
+          "short": "Open Library author key",
           "type": "`$STRING`"
         },
         {
           "name": "name",
+          "short": "Author name",
           "type": "`$STRING`"
         },
         {
           "name": "top_subjects",
+          "short": "Top subjects associated with this author",
           "type": "`$ARRAY`"
         },
         {
           "name": "top_work",
+          "short": "Title of top work",
           "type": "`$STRING`"
         },
         {
           "name": "work_count",
+          "short": "Number of works by this author",
           "type": "`$INTEGER`"
         }
       ],
@@ -149,58 +167,72 @@ class Config {
       "fields": [
         {
           "name": "author_key",
+          "short": "List of Open Library author keys",
           "type": "`$ARRAY`"
         },
         {
           "name": "author_name",
+          "short": "List of author names",
           "type": "`$ARRAY`"
         },
         {
           "name": "cover_i",
+          "short": "Cover image ID",
           "type": "`$INTEGER`"
         },
         {
           "name": "edition_count",
+          "short": "Number of editions for this work",
           "type": "`$INTEGER`"
         },
         {
           "name": "editions",
+          "short": "Nested editions data when fields parameter includes editions",
           "type": "`$OBJECT`"
         },
         {
           "name": "first_publish_year",
+          "short": "Year of first publication",
           "type": "`$INTEGER`"
         },
         {
           "name": "has_fulltext",
+          "short": "Whether full text is available",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "ia",
+          "short": "Internet Archive identifiers",
           "type": "`$ARRAY`"
         },
         {
           "name": "isbn",
+          "short": "List of ISBNs",
           "type": "`$ARRAY`"
         },
         {
           "name": "key",
+          "short": "Open Library work key",
           "type": "`$STRING`"
         },
         {
           "name": "language",
+          "short": "List of language codes",
           "type": "`$ARRAY`"
         },
         {
           "name": "public_scan_b",
+          "short": "Whether public scans are available",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "publisher",
+          "short": "List of publishers",
           "type": "`$ARRAY`"
         },
         {
           "name": "title",
+          "short": "Title of the book",
           "type": "`$STRING`"
         }
       ],

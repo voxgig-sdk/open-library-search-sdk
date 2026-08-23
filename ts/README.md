@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -288,13 +288,13 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `birth_date` |  |
-| `death_date` |  |
-| `key` |  |
-| `name` |  |
-| `top_subjects` |  |
-| `top_work` |  |
-| `work_count` |  |
+| `birth_date` | Author birth date |
+| `death_date` | Author death date |
+| `key` | Open Library author key |
+| `name` | Author name |
+| `top_subjects` | Top subjects associated with this author |
+| `top_work` | Title of top work |
+| `work_count` | Number of works by this author |
 
 Operations: list.
 
@@ -304,20 +304,20 @@ API path: `/search/authors.json`
 
 | Field | Description |
 | --- | --- |
-| `author_key` |  |
-| `author_name` |  |
-| `cover_i` |  |
-| `edition_count` |  |
-| `editions` |  |
-| `first_publish_year` |  |
-| `has_fulltext` |  |
-| `ia` |  |
-| `isbn` |  |
-| `key` |  |
-| `language` |  |
-| `public_scan_b` |  |
-| `publisher` |  |
-| `title` |  |
+| `author_key` | List of Open Library author keys |
+| `author_name` | List of author names |
+| `cover_i` | Cover image ID |
+| `edition_count` | Number of editions for this work |
+| `editions` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | Year of first publication |
+| `has_fulltext` | Whether full text is available |
+| `ia` | Internet Archive identifiers |
+| `isbn` | List of ISBNs |
+| `key` | Open Library work key |
+| `language` | List of language codes |
+| `public_scan_b` | Whether public scans are available |
+| `publisher` | List of publishers |
+| `title` | Title of the book |
 
 Operations: list.
 
@@ -342,13 +342,13 @@ Create an instance: `const author = client.Author()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `birth_date` | `string` |  |
-| `death_date` | `string` |  |
-| `key` | `string` |  |
-| `name` | `string` |  |
-| `top_subjects` | `any[]` |  |
-| `top_work` | `string` |  |
-| `work_count` | `number` |  |
+| `birth_date` | `string` | Author birth date |
+| `death_date` | `string` | Author death date |
+| `key` | `string` | Open Library author key |
+| `name` | `string` | Author name |
+| `top_subjects` | `any[]` | Top subjects associated with this author |
+| `top_work` | `string` | Title of top work |
+| `work_count` | `number` | Number of works by this author |
 
 #### Example: List
 
@@ -371,20 +371,20 @@ Create an instance: `const search = client.Search()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author_key` | `any[]` |  |
-| `author_name` | `any[]` |  |
-| `cover_i` | `number` |  |
-| `edition_count` | `number` |  |
-| `editions` | `Record<string, any>` |  |
-| `first_publish_year` | `number` |  |
-| `has_fulltext` | `boolean` |  |
-| `ia` | `any[]` |  |
-| `isbn` | `any[]` |  |
-| `key` | `string` |  |
-| `language` | `any[]` |  |
-| `public_scan_b` | `boolean` |  |
-| `publisher` | `any[]` |  |
-| `title` | `string` |  |
+| `author_key` | `any[]` | List of Open Library author keys |
+| `author_name` | `any[]` | List of author names |
+| `cover_i` | `number` | Cover image ID |
+| `edition_count` | `number` | Number of editions for this work |
+| `editions` | `Record<string, any>` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `number` | Year of first publication |
+| `has_fulltext` | `boolean` | Whether full text is available |
+| `ia` | `any[]` | Internet Archive identifiers |
+| `isbn` | `any[]` | List of ISBNs |
+| `key` | `string` | Open Library work key |
+| `language` | `any[]` | List of language codes |
+| `public_scan_b` | `boolean` | Whether public scans are available |
+| `publisher` | `any[]` | List of publishers |
+| `title` | `string` | Title of the book |
 
 #### Example: List
 

@@ -96,13 +96,13 @@ $author = $client->Author();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | `string` | No |  |
-| `death_date` | `string` | No |  |
-| `key` | `string` | No |  |
-| `name` | `string` | No |  |
-| `top_subjects` | `array` | No |  |
-| `top_work` | `string` | No |  |
-| `work_count` | `int` | No |  |
+| `birth_date` | `string` | No | Author birth date |
+| `death_date` | `string` | No | Author death date |
+| `key` | `string` | No | Open Library author key |
+| `name` | `string` | No | Author name |
+| `top_subjects` | `array` | No | Top subjects associated with this author |
+| `top_work` | `string` | No | Title of top work |
+| `work_count` | `int` | No | Number of works by this author |
 
 ### Operations
 
@@ -154,20 +154,20 @@ $search = $client->Search();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | `array` | No |  |
-| `author_name` | `array` | No |  |
-| `cover_i` | `int` | No |  |
-| `edition_count` | `int` | No |  |
-| `editions` | `array` | No |  |
-| `first_publish_year` | `int` | No |  |
-| `has_fulltext` | `bool` | No |  |
-| `ia` | `array` | No |  |
-| `isbn` | `array` | No |  |
-| `key` | `string` | No |  |
-| `language` | `array` | No |  |
-| `public_scan_b` | `bool` | No |  |
-| `publisher` | `array` | No |  |
-| `title` | `string` | No |  |
+| `author_key` | `array` | No | List of Open Library author keys |
+| `author_name` | `array` | No | List of author names |
+| `cover_i` | `int` | No | Cover image ID |
+| `edition_count` | `int` | No | Number of editions for this work |
+| `editions` | `array` | No | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `int` | No | Year of first publication |
+| `has_fulltext` | `bool` | No | Whether full text is available |
+| `ia` | `array` | No | Internet Archive identifiers |
+| `isbn` | `array` | No | List of ISBNs |
+| `key` | `string` | No | Open Library work key |
+| `language` | `array` | No | List of language codes |
+| `public_scan_b` | `bool` | No | Whether public scans are available |
+| `publisher` | `array` | No | List of publishers |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 

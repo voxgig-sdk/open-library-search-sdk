@@ -8,36 +8,43 @@ main: kit: entity: author: {
     {
       name: "birth_date"
       req: false
+      short: "Author birth date"
       type: "`$STRING`"
     }
     {
       name: "death_date"
       req: false
+      short: "Author death date"
       type: "`$STRING`"
     }
     {
       name: "key"
       req: false
+      short: "Open Library author key"
       type: "`$STRING`"
     }
     {
       name: "name"
       req: false
+      short: "Author name"
       type: "`$STRING`"
     }
     {
       name: "top_subjects"
       req: false
+      short: "Top subjects associated with this author"
       type: "`$ARRAY`"
     }
     {
       name: "top_work"
       req: false
+      short: "Title of top work"
       type: "`$STRING`"
     }
     {
       name: "work_count"
       req: false
+      short: "Number of works by this author"
       type: "`$INTEGER`"
     }
   ]

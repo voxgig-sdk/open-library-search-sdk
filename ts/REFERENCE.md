@@ -128,13 +128,13 @@ const author = client.Author()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `birth_date` | `string` | No |  |
-| `death_date` | `string` | No |  |
-| `key` | `string` | No |  |
-| `name` | `string` | No |  |
-| `top_subjects` | `any[]` | No |  |
-| `top_work` | `string` | No |  |
-| `work_count` | `number` | No |  |
+| `birth_date` | `string` | No | Author birth date |
+| `death_date` | `string` | No | Author death date |
+| `key` | `string` | No | Open Library author key |
+| `name` | `string` | No | Author name |
+| `top_subjects` | `any[]` | No | Top subjects associated with this author |
+| `top_work` | `string` | No | Title of top work |
+| `work_count` | `number` | No | Number of works by this author |
 
 ### Operations
 
@@ -184,20 +184,20 @@ const search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_key` | `any[]` | No |  |
-| `author_name` | `any[]` | No |  |
-| `cover_i` | `number` | No |  |
-| `edition_count` | `number` | No |  |
-| `editions` | `Record<string, any>` | No |  |
-| `first_publish_year` | `number` | No |  |
-| `has_fulltext` | `boolean` | No |  |
-| `ia` | `any[]` | No |  |
-| `isbn` | `any[]` | No |  |
-| `key` | `string` | No |  |
-| `language` | `any[]` | No |  |
-| `public_scan_b` | `boolean` | No |  |
-| `publisher` | `any[]` | No |  |
-| `title` | `string` | No |  |
+| `author_key` | `any[]` | No | List of Open Library author keys |
+| `author_name` | `any[]` | No | List of author names |
+| `cover_i` | `number` | No | Cover image ID |
+| `edition_count` | `number` | No | Number of editions for this work |
+| `editions` | `Record<string, any>` | No | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `number` | No | Year of first publication |
+| `has_fulltext` | `boolean` | No | Whether full text is available |
+| `ia` | `any[]` | No | Internet Archive identifiers |
+| `isbn` | `any[]` | No | List of ISBNs |
+| `key` | `string` | No | Open Library work key |
+| `language` | `any[]` | No | List of language codes |
+| `public_scan_b` | `boolean` | No | Whether public scans are available |
+| `publisher` | `any[]` | No | List of publishers |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 

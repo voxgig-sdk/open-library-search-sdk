@@ -248,13 +248,13 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `birth_date` |  |
-| `death_date` |  |
-| `key` |  |
-| `name` |  |
-| `top_subjects` |  |
-| `top_work` |  |
-| `work_count` |  |
+| `birth_date` | Author birth date |
+| `death_date` | Author death date |
+| `key` | Open Library author key |
+| `name` | Author name |
+| `top_subjects` | Top subjects associated with this author |
+| `top_work` | Title of top work |
+| `work_count` | Number of works by this author |
 
 Operations: List.
 
@@ -264,20 +264,20 @@ API path: `/search/authors.json`
 
 | Field | Description |
 | --- | --- |
-| `author_key` |  |
-| `author_name` |  |
-| `cover_i` |  |
-| `edition_count` |  |
-| `editions` |  |
-| `first_publish_year` |  |
-| `has_fulltext` |  |
-| `ia` |  |
-| `isbn` |  |
-| `key` |  |
-| `language` |  |
-| `public_scan_b` |  |
-| `publisher` |  |
-| `title` |  |
+| `author_key` | List of Open Library author keys |
+| `author_name` | List of author names |
+| `cover_i` | Cover image ID |
+| `edition_count` | Number of editions for this work |
+| `editions` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | Year of first publication |
+| `has_fulltext` | Whether full text is available |
+| `ia` | Internet Archive identifiers |
+| `isbn` | List of ISBNs |
+| `key` | Open Library work key |
+| `language` | List of language codes |
+| `public_scan_b` | Whether public scans are available |
+| `publisher` | List of publishers |
+| `title` | Title of the book |
 
 Operations: List.
 
@@ -302,13 +302,13 @@ Create an instance: `$author = $client->Author();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `birth_date` | `string` |  |
-| `death_date` | `string` |  |
-| `key` | `string` |  |
-| `name` | `string` |  |
-| `top_subjects` | `array` |  |
-| `top_work` | `string` |  |
-| `work_count` | `int` |  |
+| `birth_date` | `string` | Author birth date |
+| `death_date` | `string` | Author death date |
+| `key` | `string` | Open Library author key |
+| `name` | `string` | Author name |
+| `top_subjects` | `array` | Top subjects associated with this author |
+| `top_work` | `string` | Title of top work |
+| `work_count` | `int` | Number of works by this author |
 
 #### Example: List
 
@@ -332,20 +332,20 @@ Create an instance: `$search = $client->Search();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author_key` | `array` |  |
-| `author_name` | `array` |  |
-| `cover_i` | `int` |  |
-| `edition_count` | `int` |  |
-| `editions` | `array` |  |
-| `first_publish_year` | `int` |  |
-| `has_fulltext` | `bool` |  |
-| `ia` | `array` |  |
-| `isbn` | `array` |  |
-| `key` | `string` |  |
-| `language` | `array` |  |
-| `public_scan_b` | `bool` |  |
-| `publisher` | `array` |  |
-| `title` | `string` |  |
+| `author_key` | `array` | List of Open Library author keys |
+| `author_name` | `array` | List of author names |
+| `cover_i` | `int` | Cover image ID |
+| `edition_count` | `int` | Number of editions for this work |
+| `editions` | `array` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `int` | Year of first publication |
+| `has_fulltext` | `bool` | Whether full text is available |
+| `ia` | `array` | Internet Archive identifiers |
+| `isbn` | `array` | List of ISBNs |
+| `key` | `string` | Open Library work key |
+| `language` | `array` | List of language codes |
+| `public_scan_b` | `bool` | Whether public scans are available |
+| `publisher` | `array` | List of publishers |
+| `title` | `string` | Title of the book |
 
 #### Example: List
 

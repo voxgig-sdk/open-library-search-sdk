@@ -238,13 +238,13 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `birth_date` |  |
-| `death_date` |  |
-| `key` |  |
-| `name` |  |
-| `top_subjects` |  |
-| `top_work` |  |
-| `work_count` |  |
+| `birth_date` | Author birth date |
+| `death_date` | Author death date |
+| `key` | Open Library author key |
+| `name` | Author name |
+| `top_subjects` | Top subjects associated with this author |
+| `top_work` | Title of top work |
+| `work_count` | Number of works by this author |
 
 Operations: List.
 
@@ -254,20 +254,20 @@ API path: `/search/authors.json`
 
 | Field | Description |
 | --- | --- |
-| `author_key` |  |
-| `author_name` |  |
-| `cover_i` |  |
-| `edition_count` |  |
-| `editions` |  |
-| `first_publish_year` |  |
-| `has_fulltext` |  |
-| `ia` |  |
-| `isbn` |  |
-| `key` |  |
-| `language` |  |
-| `public_scan_b` |  |
-| `publisher` |  |
-| `title` |  |
+| `author_key` | List of Open Library author keys |
+| `author_name` | List of author names |
+| `cover_i` | Cover image ID |
+| `edition_count` | Number of editions for this work |
+| `editions` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | Year of first publication |
+| `has_fulltext` | Whether full text is available |
+| `ia` | Internet Archive identifiers |
+| `isbn` | List of ISBNs |
+| `key` | Open Library work key |
+| `language` | List of language codes |
+| `public_scan_b` | Whether public scans are available |
+| `publisher` | List of publishers |
+| `title` | Title of the book |
 
 Operations: List.
 
@@ -292,13 +292,13 @@ Create an instance: `author = client.Author`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `birth_date` | `String` |  |
-| `death_date` | `String` |  |
-| `key` | `String` |  |
-| `name` | `String` |  |
-| `top_subjects` | `Array` |  |
-| `top_work` | `String` |  |
-| `work_count` | `Integer` |  |
+| `birth_date` | `String` | Author birth date |
+| `death_date` | `String` | Author death date |
+| `key` | `String` | Open Library author key |
+| `name` | `String` | Author name |
+| `top_subjects` | `Array` | Top subjects associated with this author |
+| `top_work` | `String` | Title of top work |
+| `work_count` | `Integer` | Number of works by this author |
 
 #### Example: List
 
@@ -322,20 +322,20 @@ Create an instance: `search = client.Search`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author_key` | `Array` |  |
-| `author_name` | `Array` |  |
-| `cover_i` | `Integer` |  |
-| `edition_count` | `Integer` |  |
-| `editions` | `Hash` |  |
-| `first_publish_year` | `Integer` |  |
-| `has_fulltext` | `Boolean` |  |
-| `ia` | `Array` |  |
-| `isbn` | `Array` |  |
-| `key` | `String` |  |
-| `language` | `Array` |  |
-| `public_scan_b` | `Boolean` |  |
-| `publisher` | `Array` |  |
-| `title` | `String` |  |
+| `author_key` | `Array` | List of Open Library author keys |
+| `author_name` | `Array` | List of author names |
+| `cover_i` | `Integer` | Cover image ID |
+| `edition_count` | `Integer` | Number of editions for this work |
+| `editions` | `Hash` | Nested editions data when fields parameter includes editions |
+| `first_publish_year` | `Integer` | Year of first publication |
+| `has_fulltext` | `Boolean` | Whether full text is available |
+| `ia` | `Array` | Internet Archive identifiers |
+| `isbn` | `Array` | List of ISBNs |
+| `key` | `String` | Open Library work key |
+| `language` | `Array` | List of language codes |
+| `public_scan_b` | `Boolean` | Whether public scans are available |
+| `publisher` | `Array` | List of publishers |
+| `title` | `String` | Title of the book |
 
 #### Example: List
 
