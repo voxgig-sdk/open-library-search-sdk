@@ -16,13 +16,9 @@ export interface Author {
 }
 
 export interface AuthorListMatch {
-  birth_date?: string
-  death_date?: string
-  key?: string
-  name?: string
-  top_subjects?: any[]
-  top_work?: string
-  work_count?: number
+  limit?: number
+  offset?: number
+  q: string
 }
 
 export interface Search {
@@ -43,19 +39,18 @@ export interface Search {
 }
 
 export interface SearchListMatch {
-  author_key?: any[]
-  author_name?: any[]
-  cover_i?: number
-  edition_count?: number
-  editions?: Record<string, any>
-  first_publish_year?: number
+  author?: string
+  ebook_access?: string
+  field?: string
   has_fulltext?: boolean
-  ia?: any[]
-  isbn?: any[]
-  key?: string
-  language?: any[]
-  public_scan_b?: boolean
-  publisher?: any[]
+  lang?: string
+  language?: string
+  limit?: number
+  offset?: number
+  page?: number
+  publisher?: string
+  q?: string
+  sort?: string
   title?: string
 }
 

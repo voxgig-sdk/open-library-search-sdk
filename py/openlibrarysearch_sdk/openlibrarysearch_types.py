@@ -26,14 +26,13 @@ class Author(TypedDict, total=False):
     work_count: int
 
 
-class AuthorListMatch(TypedDict, total=False):
-    birth_date: str
-    death_date: str
-    key: str
-    name: str
-    top_subjects: list
-    top_work: str
-    work_count: int
+class AuthorListMatchRequired(TypedDict):
+    q: str
+
+
+class AuthorListMatch(AuthorListMatchRequired, total=False):
+    limit: int
+    offset: int
 
 
 class Search(TypedDict, total=False):
@@ -54,17 +53,16 @@ class Search(TypedDict, total=False):
 
 
 class SearchListMatch(TypedDict, total=False):
-    author_key: list
-    author_name: list
-    cover_i: int
-    edition_count: int
-    editions: dict
-    first_publish_year: int
+    author: str
+    ebook_access: str
+    field: str
     has_fulltext: bool
-    ia: list
-    isbn: list
-    key: str
-    language: list
-    public_scan_b: bool
-    publisher: list
+    lang: str
+    language: str
+    limit: int
+    offset: int
+    page: int
+    publisher: str
+    q: str
+    sort: str
     title: str

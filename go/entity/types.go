@@ -25,13 +25,9 @@ type Author struct {
 
 // AuthorListMatch is the typed request payload for Author.ListTyped.
 type AuthorListMatch struct {
-	BirthDate *string `json:"birth_date,omitempty"`
-	DeathDate *string `json:"death_date,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TopSubjects *[]any `json:"top_subjects,omitempty"`
-	TopWork *string `json:"top_work,omitempty"`
-	WorkCount *int `json:"work_count,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Q string `json:"q"`
 }
 
 // Search is the typed data model for the search entity.
@@ -54,19 +50,18 @@ type Search struct {
 
 // SearchListMatch is the typed request payload for Search.ListTyped.
 type SearchListMatch struct {
-	AuthorKey *[]any `json:"author_key,omitempty"`
-	AuthorName *[]any `json:"author_name,omitempty"`
-	CoverI *int `json:"cover_i,omitempty"`
-	EditionCount *int `json:"edition_count,omitempty"`
-	Editions *map[string]any `json:"editions,omitempty"`
-	FirstPublishYear *int `json:"first_publish_year,omitempty"`
+	Author *string `json:"author,omitempty"`
+	EbookAccess *string `json:"ebook_access,omitempty"`
+	Field *string `json:"field,omitempty"`
 	HasFulltext *bool `json:"has_fulltext,omitempty"`
-	Ia *[]any `json:"ia,omitempty"`
-	Isbn *[]any `json:"isbn,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Language *[]any `json:"language,omitempty"`
-	PublicScanB *bool `json:"public_scan_b,omitempty"`
-	Publisher *[]any `json:"publisher,omitempty"`
+	Lang *string `json:"lang,omitempty"`
+	Language *string `json:"language,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Page *int `json:"page,omitempty"`
+	Publisher *string `json:"publisher,omitempty"`
+	Q *string `json:"q,omitempty"`
+	Sort *string `json:"sort,omitempty"`
 	Title *string `json:"title,omitempty"`
 }
 

@@ -16,13 +16,9 @@
 ---@field work_count? number
 
 ---@class AuthorListMatch
----@field birth_date? string
----@field death_date? string
----@field key? string
----@field name? string
----@field top_subjects? table
----@field top_work? string
----@field work_count? number
+---@field limit? number
+---@field offset? number
+---@field q string
 
 ---@class Search
 ---@field author_key? table
@@ -41,19 +37,18 @@
 ---@field title? string
 
 ---@class SearchListMatch
----@field author_key? table
----@field author_name? table
----@field cover_i? number
----@field edition_count? number
----@field editions? table
----@field first_publish_year? number
+---@field author? string
+---@field ebook_access? string
+---@field field? string
 ---@field has_fulltext? boolean
----@field ia? table
----@field isbn? table
----@field key? string
----@field language? table
----@field public_scan_b? boolean
----@field publisher? table
+---@field lang? string
+---@field language? string
+---@field limit? number
+---@field offset? number
+---@field page? number
+---@field publisher? string
+---@field q? string
+---@field sort? string
 ---@field title? string
 
 local M = {}

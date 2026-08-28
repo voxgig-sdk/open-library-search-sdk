@@ -27,13 +27,9 @@ class Author
 /** Request payload for Author#list. */
 class AuthorListMatch
 {
-    public ?string $birth_date = null;
-    public ?string $death_date = null;
-    public ?string $key = null;
-    public ?string $name = null;
-    public ?array $top_subjects = null;
-    public ?string $top_work = null;
-    public ?int $work_count = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
+    public string $q;
 }
 
 /** Search entity data model. */
@@ -58,19 +54,18 @@ class Search
 /** Request payload for Search#list. */
 class SearchListMatch
 {
-    public ?array $author_key = null;
-    public ?array $author_name = null;
-    public ?int $cover_i = null;
-    public ?int $edition_count = null;
-    public ?array $editions = null;
-    public ?int $first_publish_year = null;
+    public ?string $author = null;
+    public ?string $ebook_access = null;
+    public ?string $field = null;
     public ?bool $has_fulltext = null;
-    public ?array $ia = null;
-    public ?array $isbn = null;
-    public ?string $key = null;
-    public ?array $language = null;
-    public ?bool $public_scan_b = null;
-    public ?array $publisher = null;
+    public ?string $lang = null;
+    public ?string $language = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
+    public ?int $page = null;
+    public ?string $publisher = null;
+    public ?string $q = null;
+    public ?string $sort = null;
     public ?string $title = null;
 }
 

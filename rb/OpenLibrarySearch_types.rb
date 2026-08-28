@@ -43,34 +43,18 @@ Author = Struct.new(
 
 # Request payload for Author#list.
 #
-# @!attribute [rw] birth_date
-#   @return [String, nil]
-#
-# @!attribute [rw] death_date
-#   @return [String, nil]
-#
-# @!attribute [rw] key
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] top_subjects
-#   @return [Array, nil]
-#
-# @!attribute [rw] top_work
-#   @return [String, nil]
-#
-# @!attribute [rw] work_count
+# @!attribute [rw] limit
 #   @return [Integer, nil]
+#
+# @!attribute [rw] offset
+#   @return [Integer, nil]
+#
+# @!attribute [rw] q
+#   @return [String]
 AuthorListMatch = Struct.new(
-  :birth_date,
-  :death_date,
-  :key,
-  :name,
-  :top_subjects,
-  :top_work,
-  :work_count,
+  :limit,
+  :offset,
+  :q,
   keyword_init: true
 )
 
@@ -137,61 +121,57 @@ Search = Struct.new(
 
 # Request payload for Search#list.
 #
-# @!attribute [rw] author_key
-#   @return [Array, nil]
+# @!attribute [rw] author
+#   @return [String, nil]
 #
-# @!attribute [rw] author_name
-#   @return [Array, nil]
+# @!attribute [rw] ebook_access
+#   @return [String, nil]
 #
-# @!attribute [rw] cover_i
-#   @return [Integer, nil]
-#
-# @!attribute [rw] edition_count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] editions
-#   @return [Hash, nil]
-#
-# @!attribute [rw] first_publish_year
-#   @return [Integer, nil]
+# @!attribute [rw] field
+#   @return [String, nil]
 #
 # @!attribute [rw] has_fulltext
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] ia
-#   @return [Array, nil]
-#
-# @!attribute [rw] isbn
-#   @return [Array, nil]
-#
-# @!attribute [rw] key
+# @!attribute [rw] lang
 #   @return [String, nil]
 #
 # @!attribute [rw] language
-#   @return [Array, nil]
+#   @return [String, nil]
 #
-# @!attribute [rw] public_scan_b
-#   @return [Boolean, nil]
+# @!attribute [rw] limit
+#   @return [Integer, nil]
+#
+# @!attribute [rw] offset
+#   @return [Integer, nil]
+#
+# @!attribute [rw] page
+#   @return [Integer, nil]
 #
 # @!attribute [rw] publisher
-#   @return [Array, nil]
+#   @return [String, nil]
+#
+# @!attribute [rw] q
+#   @return [String, nil]
+#
+# @!attribute [rw] sort
+#   @return [String, nil]
 #
 # @!attribute [rw] title
 #   @return [String, nil]
 SearchListMatch = Struct.new(
-  :author_key,
-  :author_name,
-  :cover_i,
-  :edition_count,
-  :editions,
-  :first_publish_year,
+  :author,
+  :ebook_access,
+  :field,
   :has_fulltext,
-  :ia,
-  :isbn,
-  :key,
+  :lang,
   :language,
-  :public_scan_b,
+  :limit,
+  :offset,
+  :page,
   :publisher,
+  :q,
+  :sort,
   :title,
   keyword_init: true
 )
