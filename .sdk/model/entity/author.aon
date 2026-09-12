@@ -85,9 +85,13 @@ main: kit: entity: author: {
           }
           method: "GET"
           orig: "/search/authors.json"
-          parts: [
-            "search"
-            "authors.json"
+          segments: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "authors.json"
+            }
           ]
           select: {
             exist: [

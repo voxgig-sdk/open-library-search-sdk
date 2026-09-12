@@ -204,8 +204,10 @@ main: kit: entity: search: {
           }
           method: "GET"
           orig: "/search.json"
-          parts: [
-            "search.json"
+          segments: [
+            {
+              lit: "search.json"
+            }
           ]
           select: {
             exist: [

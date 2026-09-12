@@ -104,9 +104,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/search/authors.json",
-                ["parts"] = {
-                  "search",
-                  "authors.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "authors.json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -118,6 +122,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.docs`",
+                },
+                ["parts"] = {
+                  "search",
+                  "authors.json",
                 },
               },
             },
@@ -302,8 +310,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/search.json",
-                ["parts"] = {
-                  "search.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "search.json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -325,6 +335,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.docs`",
+                },
+                ["parts"] = {
+                  "search.json",
                 },
               },
             },
