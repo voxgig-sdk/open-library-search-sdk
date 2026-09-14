@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search'
+import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search-sdk'
 
 const client = new OpenLibrarySearchSDK()
 ```
@@ -475,7 +475,7 @@ open-library-search/
 Import the SDK from the package root:
 
 ```ts
-import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search'
+import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search-sdk'
 ```
 
 ### Entity state

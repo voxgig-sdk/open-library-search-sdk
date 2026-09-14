@@ -105,7 +105,7 @@ local results, err = client:Author():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
+| TypeScript | `@voxgig-sdk/open-library-search-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
 | Python | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
 | PHP | `voxgig-sdk/open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/open-library-search-sdk/go` | `go get github.com/voxgig-sdk/open-library-search-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Author():list()
 ### TypeScript
 
 ```ts
-import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search'
+import { OpenLibrarySearchSDK } from '@voxgig-sdk/open-library-search-sdk'
 
 const client = new OpenLibrarySearchSDK()
 
