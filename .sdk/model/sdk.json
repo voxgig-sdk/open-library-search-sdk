@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "author": {
           "active": true,
@@ -120,6 +184,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /search/authors.json",
+                    "json": "{\"operationId\":\"searchAuthors\",\"parameters\":[{\"description\":\"The search query for author names\",\"example\":\"twain\",\"in\":\"query\",\"name\":\"q\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to skip for pagination\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Maximum number of results to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"docs\":{\"description\":\"Array of author documents\",\"items\":{\"properties\":{\"birth_date\":{\"description\":\"Author birth date\",\"type\":\"string\"},\"death_date\":{\"description\":\"Author death date\",\"type\":\"string\"},\"key\":{\"description\":\"Open Library author key\",\"type\":\"string\"},\"name\":{\"description\":\"Author name\",\"type\":\"string\"},\"top_subjects\":{\"description\":\"Top subjects associated with this author\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"top_work\":{\"description\":\"Title of top work\",\"type\":\"string\"},\"work_count\":{\"description\":\"Number of works by this author\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of authors found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the count is exact\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful author search response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid query parameters\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -382,6 +452,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /search.json",
+                    "json": "{\"operationId\":\"searchBooks\",\"parameters\":[{\"description\":\"The solr query. General search term for books.\",\"example\":\"the lord of the rings\",\"in\":\"query\",\"name\":\"q\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Search by book title\",\"example\":\"the lord of the rings\",\"in\":\"query\",\"name\":\"title\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Search by author name\",\"example\":\"tolkien\",\"in\":\"query\",\"name\":\"author\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Comma-separated list of fields to return from solr. Use * to fetch all fields. Add 'availability' to fetch availability data from archive.org. Can also specify edition fields like 'editions.key,editions.title'.\",\"example\":\"key,title,author_name,editions\",\"in\":\"query\",\"name\":\"fields\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Sort results by various facets such as 'new', 'old', 'random', or 'key'. Default is relevance.\",\"example\":\"new\",\"in\":\"query\",\"name\":\"sort\",\"required\":false,\"schema\":{\"enum\":[\"new\",\"old\",\"random\",\"key\",\"relevance\"],\"type\":\"string\"}},{\"description\":\"Two letter ISO 639-1 language code. Influences but doesn't exclude search results by preferring editions in this language.\",\"example\":\"en\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"pattern\":\"^[a-z]{2}$\",\"type\":\"string\"}},{\"description\":\"Number of results to skip for pagination.\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Maximum number of results to return (page size).\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Page number for pagination (starts at 1). Use with 'limit' parameter.\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":1,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Filter by publisher name\",\"in\":\"query\",\"name\":\"publisher\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by language code (e.g., 'fre' for French, 'eng' for English)\",\"example\":\"eng\",\"in\":\"query\",\"name\":\"language\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter for books with full text available\",\"in\":\"query\",\"name\":\"has_fulltext\",\"required\":false,\"schema\":{\"type\":\"boolean\"}},{\"description\":\"Filter by ebook access type\",\"in\":\"query\",\"name\":\"ebook_access\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"docs\":[{\"author_key\":[\"OL26320A\"],\"author_name\":[\"J. R. R. Tolkien\"],\"cover_i\":258027,\"edition_count\":120,\"first_publish_year\":1954,\"has_fulltext\":true,\"ia\":[\"returnofking00tolk_1\",\"lordofrings00tolk_1\"],\"key\":\"/works/OL27448W\",\"public_scan_b\":true,\"title\":\"The Lord of the Rings\"}],\"numFound\":629,\"numFoundExact\":true,\"start\":0},\"schema\":{\"properties\":{\"docs\":{\"description\":\"Array of book documents\",\"items\":{\"properties\":{\"author_key\":{\"description\":\"List of Open Library author keys\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"author_name\":{\"description\":\"List of author names\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"cover_i\":{\"description\":\"Cover image ID\",\"type\":\"integer\"},\"edition_count\":{\"description\":\"Number of editions for this work\",\"type\":\"integer\"},\"editions\":{\"description\":\"Nested editions data when fields parameter includes editions\",\"properties\":{\"docs\":{\"description\":\"Array of edition documents\",\"items\":{\"properties\":{\"ebook_access\":{\"description\":\"Ebook access type (e.g., 'public', 'borrowable')\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBNs for this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"key\":{\"description\":\"Open Library edition key\",\"example\":\"/books/OL37239326M\",\"type\":\"string\"},\"language\":{\"description\":\"Language codes for this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"publish_date\":{\"description\":\"Publication date\",\"type\":\"string\"},\"publisher\":{\"description\":\"Publishers of this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"Title of the edition\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of editions found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the count is exact\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset\",\"type\":\"integer\"}},\"type\":\"object\"},\"first_publish_year\":{\"description\":\"Year of first publication\",\"type\":\"integer\"},\"has_fulltext\":{\"description\":\"Whether full text is available\",\"type\":\"boolean\"},\"ia\":{\"description\":\"Internet Archive identifiers\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isbn\":{\"description\":\"List of ISBNs\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"key\":{\"description\":\"Open Library work key\",\"example\":\"/works/OL27448W\",\"type\":\"string\"},\"language\":{\"description\":\"List of language codes\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"public_scan_b\":{\"description\":\"Whether public scans are available\",\"type\":\"boolean\"},\"publisher\":{\"description\":\"List of publishers\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"Title of the book\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of documents found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the numFound is exact or an estimate\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset of the results\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful search response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid query parameters\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/search.json",
@@ -421,13 +497,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -518,6 +804,102 @@
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
           "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
+          "version": "0.0.1"
         }
       },
       "flow": {
@@ -598,6 +980,48 @@
         "website": "https://openlibrary.org/dev/docs/api/search"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1152,6 +1576,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1193,7 +1618,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

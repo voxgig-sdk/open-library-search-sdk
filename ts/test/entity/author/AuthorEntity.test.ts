@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { OpenLibrarySearchSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('AuthorEntity', async () => {
 
     const live = 'TRUE' === process.env.OPEN_LIBRARY_SEARCH_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'author.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'author.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"birth_date","req":false,"short":"Author birth date","type":"`$STRING`","index$":0},{"active":true,"name":"death_date","req":false,"short":"Author death date","type":"`$STRING`","index$":1},{"active":true,"name":"key","req":false,"short":"Open Library author key","type":"`$STRING`","index$":2},{"active":true,"name":"name","req":false,"short":"Author name","type":"`$STRING`","index$":3},{"active":true,"name":"top_subjects","req":false,"short":"Top subjects associated with this author","type":"`$ARRAY`","index$":4},{"active":true,"name":"top_work","req":false,"short":"Title of top work","type":"`$STRING`","index$":5},{"active":true,"name":"work_count","req":false,"short":"Number of works by this author","type":"`$INTEGER`","index$":6}],"name":"author","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"example":10,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":0},{"active":true,"example":0,"kind":"query","name":"offset","orig":"offset","reqd":false,"type":"`$INTEGER`","index$":1},{"active":true,"example":"twain","kind":"query","name":"q","orig":"q","reqd":true,"type":"`$STRING`","index$":2}]},"contract":{"id":"GET /search/authors.json","json":"{\"operationId\":\"searchAuthors\",\"parameters\":[{\"description\":\"The search query for author names\",\"example\":\"twain\",\"in\":\"query\",\"name\":\"q\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to skip for pagination\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Maximum number of results to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"docs\":{\"description\":\"Array of author documents\",\"items\":{\"properties\":{\"birth_date\":{\"description\":\"Author birth date\",\"type\":\"string\"},\"death_date\":{\"description\":\"Author death date\",\"type\":\"string\"},\"key\":{\"description\":\"Open Library author key\",\"type\":\"string\"},\"name\":{\"description\":\"Author name\",\"type\":\"string\"},\"top_subjects\":{\"description\":\"Top subjects associated with this author\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"top_work\":{\"description\":\"Title of top work\",\"type\":\"string\"},\"work_count\":{\"description\":\"Number of works by this author\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of authors found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the count is exact\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful author search response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid query parameters\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/search/authors.json","segments":[{"lit":"search"},{"lit":"authors.json"}],"select":{"exist":["limit","offset","q"]},"transform":{"req":"`reqdata`","res":"`body.docs`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"author","name__orig":"author","Name":"Author","name_":"author","name-":"author","NAME":"AUTHOR","index$":0}, {"active":true,"entity":"author","key$":"BasicAuthorFlow","kind":"basic","name":"BasicAuthorFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"author_ref01"}}],"index$":0}]}, 'Author')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID': idmap,
     'OPEN_LIBRARY_SEARCH_TEST_LIVE': 'FALSE',
@@ -126,7 +118,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.OPEN_LIBRARY_SEARCH_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['OPEN_LIBRARY_SEARCH_TEST_AUTHOR_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new OpenLibrarySearchSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -138,7 +136,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -151,7 +150,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.OPEN_LIBRARY_SEARCH_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 
