@@ -1,4 +1,4 @@
 # Flows
 
-@"BasicAuthorFlow.aon"
-@"BasicSearchFlow.aon"
+@"./BasicAuthorFlow.aon"
+@"./BasicSearchFlow.aon"

@@ -1,4 +1,4 @@
 # Entity Models
 
-@"author.aon"
-@"search.aon"
+@"./author.aon"
+@"./search.aon"

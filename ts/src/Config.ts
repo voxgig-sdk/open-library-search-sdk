@@ -127,12 +127,12 @@ class Config {
 
     entity: {
       
-      author: {
-      },
-
-      search: {
-      },
-
+        author: {
+        },
+  
+        search: {
+        },
+  
     }
   }
 

@@ -105,12 +105,12 @@ local results, err = client:Author():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/open-library-search-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
-| Python | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
-| PHP | `voxgig-sdk/open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
+| TypeScript | `@voxgig-sdk/open-library-search-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/tags) |
+| Python | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/tags) |
+| PHP | `voxgig-sdk/open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/open-library-search-sdk/go` | `go get github.com/voxgig-sdk/open-library-search-sdk/go@latest` |
-| Ruby | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
-| Lua | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/releases) |
+| Ruby | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/tags) |
+| Lua | `voxgig-sdk-open-library-search` | publish pending — [install from git tag](https://github.com/voxgig-sdk/open-library-search-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/open-library-search-sdk/go-cli` | `go install github.com/voxgig-sdk/open-library-search-sdk/go-cli/cmd/open-library-search@latest` |
 | Go MCP server | `github.com/voxgig-sdk/open-library-search-sdk/go-mcp` | `go get github.com/voxgig-sdk/open-library-search-sdk/go-mcp@latest` |
 
