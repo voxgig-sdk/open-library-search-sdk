@@ -19,7 +19,6 @@ import type {
   AuthorListMatch,
 } from '../OpenLibrarySearchTypes'
 
-// TODO: needs Entity superclass
 class AuthorEntity extends OpenLibrarySearchEntityBase<Author> {
 
   constructor(client: OpenLibrarySearchSDK, entopts: any) {

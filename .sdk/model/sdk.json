@@ -24,63 +24,136 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "author": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "birth_date",
-              "req": false,
-              "short": "Author birth date",
-              "type": "`$STRING`"
+          "fields": {
+            "birth_date": {
+              "a": true,
+              "h": "Birth Date",
+              "n": "birth_date",
+              "r": false,
+              "sh": "Author birth date",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "death_date",
-              "req": false,
-              "short": "Author death date",
-              "type": "`$STRING`"
+            "death_date": {
+              "a": true,
+              "h": "Death Date",
+              "n": "death_date",
+              "r": false,
+              "sh": "Author death date",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "key",
-              "req": false,
-              "short": "Open Library author key",
-              "type": "`$STRING`"
+            "key": {
+              "a": true,
+              "h": "Key",
+              "n": "key",
+              "r": false,
+              "sh": "Open Library author key",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Author name",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Author name",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "top_subjects",
-              "req": false,
-              "short": "Top subjects associated with this author",
-              "type": "`$ARRAY`"
+            "top_subjects": {
+              "a": true,
+              "h": "Top Subjects",
+              "n": "top_subjects",
+              "r": false,
+              "sh": "Top subjects associated with this author",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "top_work",
-              "req": false,
-              "short": "Title of top work",
-              "type": "`$STRING`"
+            "top_work": {
+              "a": true,
+              "h": "Top Work",
+              "n": "top_work",
+              "r": false,
+              "sh": "Title of top work",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "work_count",
-              "req": false,
-              "short": "Number of works by this author",
-              "type": "`$INTEGER`"
+            "work_count": {
+              "a": true,
+              "h": "Work Count",
+              "n": "work_count",
+              "r": false,
+              "sh": "Number of works by this author",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "author",
           "op": {
             "list": {
@@ -88,48 +161,55 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /search/authors.json",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": 10,
-                        "kind": "query",
-                        "name": "limit",
-                        "orig": "limit",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 10,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "offset",
-                        "orig": "offset",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": "twain",
-                        "kind": "query",
-                        "name": "q",
-                        "orig": "q",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "twain",
+                        "k": "query",
+                        "n": "q",
+                        "or": "q",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /search/authors.json",
-                    "json": "{\"operationId\":\"searchAuthors\",\"parameters\":[{\"description\":\"The search query for author names\",\"example\":\"twain\",\"in\":\"query\",\"name\":\"q\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to skip for pagination\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Maximum number of results to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"docs\":{\"description\":\"Array of author documents\",\"items\":{\"properties\":{\"birth_date\":{\"description\":\"Author birth date\",\"type\":\"string\"},\"death_date\":{\"description\":\"Author death date\",\"type\":\"string\"},\"key\":{\"description\":\"Open Library author key\",\"type\":\"string\"},\"name\":{\"description\":\"Author name\",\"type\":\"string\"},\"top_subjects\":{\"description\":\"Top subjects associated with this author\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"top_work\":{\"description\":\"Title of top work\",\"type\":\"string\"},\"work_count\":{\"description\":\"Number of works by this author\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of authors found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the count is exact\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful author search response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid query parameters\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/search/authors.json",
+                  "q": {
+                    "exist": [
+                      "limit",
+                      "offset",
+                      "q"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/search/authors.json",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "search"
                     },
@@ -137,14 +217,7 @@
                       "lit": "authors.json"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "limit",
-                      "offset",
-                      "q"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.docs`"
                   }
@@ -161,106 +234,120 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "author_key",
-              "req": false,
-              "short": "List of Open Library author keys",
-              "type": "`$ARRAY`"
+          "fields": {
+            "author_key": {
+              "a": true,
+              "h": "Author Key",
+              "n": "author_key",
+              "r": false,
+              "sh": "List of Open Library author keys",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "author_name",
-              "req": false,
-              "short": "List of author names",
-              "type": "`$ARRAY`"
+            "author_name": {
+              "a": true,
+              "h": "Author Name",
+              "n": "author_name",
+              "r": false,
+              "sh": "List of author names",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "cover_i",
-              "req": false,
-              "short": "Cover image ID",
-              "type": "`$INTEGER`"
+            "cover_i": {
+              "a": true,
+              "h": "Cover I",
+              "n": "cover_i",
+              "r": false,
+              "sh": "Cover image ID",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "edition_count",
-              "req": false,
-              "short": "Number of editions for this work",
-              "type": "`$INTEGER`"
+            "edition_count": {
+              "a": true,
+              "h": "Edition Count",
+              "n": "edition_count",
+              "r": false,
+              "sh": "Number of editions for this work",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "editions",
-              "req": false,
-              "short": "Nested editions data when fields parameter includes editions",
-              "type": "`$OBJECT`"
+            "editions": {
+              "a": true,
+              "h": "Editions",
+              "n": "editions",
+              "r": false,
+              "sh": "Nested editions data when fields parameter includes editions",
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "first_publish_year",
-              "req": false,
-              "short": "Year of first publication",
-              "type": "`$INTEGER`"
+            "first_publish_year": {
+              "a": true,
+              "h": "First Publish Year",
+              "n": "first_publish_year",
+              "r": false,
+              "sh": "Year of first publication",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "has_fulltext",
-              "req": false,
-              "short": "Whether full text is available",
-              "type": "`$BOOLEAN`"
+            "has_fulltext": {
+              "a": true,
+              "h": "Has Fulltext",
+              "n": "has_fulltext",
+              "r": false,
+              "sh": "Whether full text is available",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "ia",
-              "req": false,
-              "short": "Internet Archive identifiers",
-              "type": "`$ARRAY`"
+            "ia": {
+              "a": true,
+              "h": "Ia",
+              "n": "ia",
+              "r": false,
+              "sh": "Internet Archive identifiers",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "isbn",
-              "req": false,
-              "short": "List of ISBNs",
-              "type": "`$ARRAY`"
+            "isbn": {
+              "a": true,
+              "h": "Isbn",
+              "n": "isbn",
+              "r": false,
+              "sh": "List of ISBNs",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "key",
-              "req": false,
-              "short": "Open Library work key",
-              "type": "`$STRING`"
+            "key": {
+              "a": true,
+              "h": "Key",
+              "n": "key",
+              "r": false,
+              "sh": "Open Library work key",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "language",
-              "req": false,
-              "short": "List of language codes",
-              "type": "`$ARRAY`"
+            "language": {
+              "a": true,
+              "h": "Language",
+              "n": "language",
+              "r": false,
+              "sh": "List of language codes",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "public_scan_b",
-              "req": false,
-              "short": "Whether public scans are available",
-              "type": "`$BOOLEAN`"
+            "public_scan_b": {
+              "a": true,
+              "h": "Public Scan B",
+              "n": "public_scan_b",
+              "r": false,
+              "sh": "Whether public scans are available",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "publisher",
-              "req": false,
-              "short": "List of publishers",
-              "type": "`$ARRAY`"
+            "publisher": {
+              "a": true,
+              "h": "Publisher",
+              "n": "publisher",
+              "r": false,
+              "sh": "List of publishers",
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "title",
-              "req": false,
-              "short": "Title of the book",
-              "type": "`$STRING`"
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": false,
+              "sh": "Title of the book",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "search",
           "op": {
             "list": {
@@ -268,140 +355,134 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /search.json",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "tolkien",
-                        "kind": "query",
-                        "name": "author",
-                        "orig": "author",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "tolkien",
+                        "k": "query",
+                        "n": "author",
+                        "or": "author",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "ebook_access",
-                        "orig": "ebook_access",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "ebook_access",
+                        "or": "ebook_access",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "key,title,author_name,editions",
-                        "kind": "query",
-                        "name": "field",
-                        "orig": "field",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "key,title,author_name,editions",
+                        "k": "query",
+                        "n": "field",
+                        "or": "field",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "has_fulltext",
-                        "orig": "has_fulltext",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "k": "query",
+                        "n": "has_fulltext",
+                        "or": "has_fulltext",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "eng",
-                        "kind": "query",
-                        "name": "language",
-                        "orig": "language",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "eng",
+                        "k": "query",
+                        "n": "language",
+                        "or": "language",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 10,
-                        "kind": "query",
-                        "name": "limit",
-                        "orig": "limit",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 10,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "offset",
-                        "orig": "offset",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 1,
-                        "kind": "query",
-                        "name": "page",
-                        "orig": "page",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 1,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "publisher",
-                        "orig": "publisher",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "publisher",
+                        "or": "publisher",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "the lord of the rings",
-                        "kind": "query",
-                        "name": "q",
-                        "orig": "q",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "the lord of the rings",
+                        "k": "query",
+                        "n": "q",
+                        "or": "q",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "new",
-                        "kind": "query",
-                        "name": "sort",
-                        "orig": "sort",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "new",
+                        "k": "query",
+                        "n": "sort",
+                        "or": "sort",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "the lord of the rings",
-                        "kind": "query",
-                        "name": "title",
-                        "orig": "title",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "the lord of the rings",
+                        "k": "query",
+                        "n": "title",
+                        "or": "title",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /search.json",
-                    "json": "{\"operationId\":\"searchBooks\",\"parameters\":[{\"description\":\"The solr query. General search term for books.\",\"example\":\"the lord of the rings\",\"in\":\"query\",\"name\":\"q\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Search by book title\",\"example\":\"the lord of the rings\",\"in\":\"query\",\"name\":\"title\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Search by author name\",\"example\":\"tolkien\",\"in\":\"query\",\"name\":\"author\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Comma-separated list of fields to return from solr. Use * to fetch all fields. Add 'availability' to fetch availability data from archive.org. Can also specify edition fields like 'editions.key,editions.title'.\",\"example\":\"key,title,author_name,editions\",\"in\":\"query\",\"name\":\"fields\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Sort results by various facets such as 'new', 'old', 'random', or 'key'. Default is relevance.\",\"example\":\"new\",\"in\":\"query\",\"name\":\"sort\",\"required\":false,\"schema\":{\"enum\":[\"new\",\"old\",\"random\",\"key\",\"relevance\"],\"type\":\"string\"}},{\"description\":\"Two letter ISO 639-1 language code. Influences but doesn't exclude search results by preferring editions in this language.\",\"example\":\"en\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"pattern\":\"^[a-z]{2}$\",\"type\":\"string\"}},{\"description\":\"Number of results to skip for pagination.\",\"in\":\"query\",\"name\":\"offset\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Maximum number of results to return (page size).\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Page number for pagination (starts at 1). Use with 'limit' parameter.\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":1,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Filter by publisher name\",\"in\":\"query\",\"name\":\"publisher\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by language code (e.g., 'fre' for French, 'eng' for English)\",\"example\":\"eng\",\"in\":\"query\",\"name\":\"language\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter for books with full text available\",\"in\":\"query\",\"name\":\"has_fulltext\",\"required\":false,\"schema\":{\"type\":\"boolean\"}},{\"description\":\"Filter by ebook access type\",\"in\":\"query\",\"name\":\"ebook_access\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"docs\":[{\"author_key\":[\"OL26320A\"],\"author_name\":[\"J. R. R. Tolkien\"],\"cover_i\":258027,\"edition_count\":120,\"first_publish_year\":1954,\"has_fulltext\":true,\"ia\":[\"returnofking00tolk_1\",\"lordofrings00tolk_1\"],\"key\":\"/works/OL27448W\",\"public_scan_b\":true,\"title\":\"The Lord of the Rings\"}],\"numFound\":629,\"numFoundExact\":true,\"start\":0},\"schema\":{\"properties\":{\"docs\":{\"description\":\"Array of book documents\",\"items\":{\"properties\":{\"author_key\":{\"description\":\"List of Open Library author keys\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"author_name\":{\"description\":\"List of author names\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"cover_i\":{\"description\":\"Cover image ID\",\"type\":\"integer\"},\"edition_count\":{\"description\":\"Number of editions for this work\",\"type\":\"integer\"},\"editions\":{\"description\":\"Nested editions data when fields parameter includes editions\",\"properties\":{\"docs\":{\"description\":\"Array of edition documents\",\"items\":{\"properties\":{\"ebook_access\":{\"description\":\"Ebook access type (e.g., 'public', 'borrowable')\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBNs for this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"key\":{\"description\":\"Open Library edition key\",\"example\":\"/books/OL37239326M\",\"type\":\"string\"},\"language\":{\"description\":\"Language codes for this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"publish_date\":{\"description\":\"Publication date\",\"type\":\"string\"},\"publisher\":{\"description\":\"Publishers of this edition\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"Title of the edition\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of editions found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the count is exact\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset\",\"type\":\"integer\"}},\"type\":\"object\"},\"first_publish_year\":{\"description\":\"Year of first publication\",\"type\":\"integer\"},\"has_fulltext\":{\"description\":\"Whether full text is available\",\"type\":\"boolean\"},\"ia\":{\"description\":\"Internet Archive identifiers\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isbn\":{\"description\":\"List of ISBNs\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"key\":{\"description\":\"Open Library work key\",\"example\":\"/works/OL27448W\",\"type\":\"string\"},\"language\":{\"description\":\"List of language codes\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"public_scan_b\":{\"description\":\"Whether public scans are available\",\"type\":\"boolean\"},\"publisher\":{\"description\":\"List of publishers\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"title\":{\"description\":\"Title of the book\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"numFound\":{\"description\":\"Total number of documents found\",\"type\":\"integer\"},\"numFoundExact\":{\"description\":\"Whether the numFound is exact or an estimate\",\"type\":\"boolean\"},\"start\":{\"description\":\"Starting offset of the results\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Successful search response\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid query parameters\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/search.json",
-                  "segments": [
-                    {
-                      "lit": "search.json"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/search.json",
+                  "q": {
                     "exist": [
                       "author",
                       "ebook_access",
@@ -418,7 +499,13 @@
                       "title"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "search.json"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.docs`"
                   }
@@ -847,13 +934,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -873,13 +960,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {

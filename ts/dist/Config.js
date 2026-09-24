@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -115,38 +108,45 @@ class Config {
             "fields": [
                 {
                     "name": "birth_date",
-                    "short": "Author birth date",
-                    "type": "`$STRING`"
+                    "title": "Birth Date",
+                    "type": "`$STRING`",
+                    "short": "Author birth date"
                 },
                 {
                     "name": "death_date",
-                    "short": "Author death date",
-                    "type": "`$STRING`"
+                    "title": "Death Date",
+                    "type": "`$STRING`",
+                    "short": "Author death date"
                 },
                 {
                     "name": "key",
-                    "short": "Open Library author key",
-                    "type": "`$STRING`"
+                    "title": "Key",
+                    "type": "`$STRING`",
+                    "short": "Open Library author key"
                 },
                 {
                     "name": "name",
-                    "short": "Author name",
-                    "type": "`$STRING`"
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "short": "Author name"
                 },
                 {
                     "name": "top_subjects",
-                    "short": "Top subjects associated with this author",
-                    "type": "`$ARRAY`"
+                    "title": "Top Subjects",
+                    "type": "`$ARRAY`",
+                    "short": "Top subjects associated with this author"
                 },
                 {
                     "name": "top_work",
-                    "short": "Title of top work",
-                    "type": "`$STRING`"
+                    "title": "Top Work",
+                    "type": "`$STRING`",
+                    "short": "Title of top work"
                 },
                 {
                     "name": "work_count",
-                    "short": "Number of works by this author",
-                    "type": "`$INTEGER`"
+                    "title": "Work Count",
+                    "type": "`$INTEGER`",
+                    "short": "Number of works by this author"
                 }
             ],
             "name": "author",
@@ -156,32 +156,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 10,
-                                        "kind": "query",
-                                        "name": "limit",
-                                        "orig": "limit",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": 0,
-                                        "kind": "query",
-                                        "name": "offset",
-                                        "orig": "offset",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": "twain",
-                                        "kind": "query",
-                                        "name": "q",
-                                        "orig": "q",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search/authors.json",
@@ -193,21 +167,48 @@ class Config {
                                     "lit": "authors.json"
                                 }
                             ],
+                            "parts": [
+                                "search",
+                                "authors.json"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.docs`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 10
+                                    },
+                                    {
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 0
+                                    },
+                                    {
+                                        "name": "q",
+                                        "orig": "q",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "twain"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "limit",
                                     "offset",
                                     "q"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.docs`"
-                            },
-                            "parts": [
-                                "search",
-                                "authors.json"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -220,73 +221,87 @@ class Config {
             "fields": [
                 {
                     "name": "author_key",
-                    "short": "List of Open Library author keys",
-                    "type": "`$ARRAY`"
+                    "title": "Author Key",
+                    "type": "`$ARRAY`",
+                    "short": "List of Open Library author keys"
                 },
                 {
                     "name": "author_name",
-                    "short": "List of author names",
-                    "type": "`$ARRAY`"
+                    "title": "Author Name",
+                    "type": "`$ARRAY`",
+                    "short": "List of author names"
                 },
                 {
                     "name": "cover_i",
-                    "short": "Cover image ID",
-                    "type": "`$INTEGER`"
+                    "title": "Cover I",
+                    "type": "`$INTEGER`",
+                    "short": "Cover image ID"
                 },
                 {
                     "name": "edition_count",
-                    "short": "Number of editions for this work",
-                    "type": "`$INTEGER`"
+                    "title": "Edition Count",
+                    "type": "`$INTEGER`",
+                    "short": "Number of editions for this work"
                 },
                 {
                     "name": "editions",
-                    "short": "Nested editions data when fields parameter includes editions",
-                    "type": "`$OBJECT`"
+                    "title": "Editions",
+                    "type": "`$OBJECT`",
+                    "short": "Nested editions data when fields parameter includes editions"
                 },
                 {
                     "name": "first_publish_year",
-                    "short": "Year of first publication",
-                    "type": "`$INTEGER`"
+                    "title": "First Publish Year",
+                    "type": "`$INTEGER`",
+                    "short": "Year of first publication"
                 },
                 {
                     "name": "has_fulltext",
-                    "short": "Whether full text is available",
-                    "type": "`$BOOLEAN`"
+                    "title": "Has Fulltext",
+                    "type": "`$BOOLEAN`",
+                    "short": "Whether full text is available"
                 },
                 {
                     "name": "ia",
-                    "short": "Internet Archive identifiers",
-                    "type": "`$ARRAY`"
+                    "title": "Ia",
+                    "type": "`$ARRAY`",
+                    "short": "Internet Archive identifiers"
                 },
                 {
                     "name": "isbn",
-                    "short": "List of ISBNs",
-                    "type": "`$ARRAY`"
+                    "title": "Isbn",
+                    "type": "`$ARRAY`",
+                    "short": "List of ISBNs"
                 },
                 {
                     "name": "key",
-                    "short": "Open Library work key",
-                    "type": "`$STRING`"
+                    "title": "Key",
+                    "type": "`$STRING`",
+                    "short": "Open Library work key"
                 },
                 {
                     "name": "language",
-                    "short": "List of language codes",
-                    "type": "`$ARRAY`"
+                    "title": "Language",
+                    "type": "`$ARRAY`",
+                    "short": "List of language codes"
                 },
                 {
                     "name": "public_scan_b",
-                    "short": "Whether public scans are available",
-                    "type": "`$BOOLEAN`"
+                    "title": "Public Scan B",
+                    "type": "`$BOOLEAN`",
+                    "short": "Whether public scans are available"
                 },
                 {
                     "name": "publisher",
-                    "short": "List of publishers",
-                    "type": "`$ARRAY`"
+                    "title": "Publisher",
+                    "type": "`$ARRAY`",
+                    "short": "List of publishers"
                 },
                 {
                     "name": "title",
-                    "short": "Title of the book",
-                    "type": "`$STRING`"
+                    "title": "Title",
+                    "type": "`$STRING`",
+                    "short": "Title of the book"
                 }
             ],
             "name": "search",
@@ -296,98 +311,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "tolkien",
-                                        "kind": "query",
-                                        "name": "author",
-                                        "orig": "author",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "ebook_access",
-                                        "orig": "ebook_access",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "key,title,author_name,editions",
-                                        "kind": "query",
-                                        "name": "field",
-                                        "orig": "field",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "has_fulltext",
-                                        "orig": "has_fulltext",
-                                        "type": "`$BOOLEAN`"
-                                    },
-                                    {
-                                        "example": "en",
-                                        "kind": "query",
-                                        "name": "lang",
-                                        "orig": "lang",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "eng",
-                                        "kind": "query",
-                                        "name": "language",
-                                        "orig": "language",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": 10,
-                                        "kind": "query",
-                                        "name": "limit",
-                                        "orig": "limit",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": 0,
-                                        "kind": "query",
-                                        "name": "offset",
-                                        "orig": "offset",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": 1,
-                                        "kind": "query",
-                                        "name": "page",
-                                        "orig": "page",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "publisher",
-                                        "orig": "publisher",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "the lord of the rings",
-                                        "kind": "query",
-                                        "name": "q",
-                                        "orig": "q",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "new",
-                                        "kind": "query",
-                                        "name": "sort",
-                                        "orig": "sort",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "the lord of the rings",
-                                        "kind": "query",
-                                        "name": "title",
-                                        "orig": "title",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search.json",
@@ -396,6 +319,106 @@ class Config {
                                     "lit": "search.json"
                                 }
                             ],
+                            "parts": [
+                                "search.json"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.docs`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "author",
+                                        "orig": "author",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "tolkien"
+                                    },
+                                    {
+                                        "name": "ebook_access",
+                                        "orig": "ebook_access",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "field",
+                                        "orig": "field",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "key,title,author_name,editions"
+                                    },
+                                    {
+                                        "name": "has_fulltext",
+                                        "orig": "has_fulltext",
+                                        "type": "`$BOOLEAN`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "lang",
+                                        "orig": "lang",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "en"
+                                    },
+                                    {
+                                        "name": "language",
+                                        "orig": "language",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "eng"
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 10
+                                    },
+                                    {
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 0
+                                    },
+                                    {
+                                        "name": "page",
+                                        "orig": "page",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 1
+                                    },
+                                    {
+                                        "name": "publisher",
+                                        "orig": "publisher",
+                                        "type": "`$STRING`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "q",
+                                        "orig": "q",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "the lord of the rings"
+                                    },
+                                    {
+                                        "name": "sort",
+                                        "orig": "sort",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "new"
+                                    },
+                                    {
+                                        "name": "title",
+                                        "orig": "title",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "the lord of the rings"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "author",
@@ -412,14 +435,7 @@ class Config {
                                     "sort",
                                     "title"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.docs`"
-                            },
-                            "parts": [
-                                "search.json"
-                            ]
+                            }
                         }
                     ]
                 }

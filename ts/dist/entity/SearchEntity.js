@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchEntity = void 0;
 const OpenLibrarySearchEntityBase_1 = require("../OpenLibrarySearchEntityBase");
-// TODO: needs Entity superclass
 class SearchEntity extends OpenLibrarySearchEntityBase_1.OpenLibrarySearchEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

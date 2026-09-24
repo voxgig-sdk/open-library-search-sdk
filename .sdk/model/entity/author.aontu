@@ -1,0 +1,126 @@
+# Entity: author
+
+main: kit: entity: author: {
+
+  alias: field: {}
+
+  fields: {
+    birth_date: {
+      h: "Birth Date"
+      n: "birth_date"
+      r: false
+      sh: "Author birth date"
+      t: "`$STRING`"
+    }
+    death_date: {
+      h: "Death Date"
+      n: "death_date"
+      r: false
+      sh: "Author death date"
+      t: "`$STRING`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: false
+      sh: "Open Library author key"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Author name"
+      t: "`$STRING`"
+    }
+    top_subjects: {
+      h: "Top Subjects"
+      n: "top_subjects"
+      r: false
+      sh: "Top subjects associated with this author"
+      t: "`$ARRAY`"
+    }
+    top_work: {
+      h: "Top Work"
+      n: "top_work"
+      r: false
+      sh: "Title of top work"
+      t: "`$STRING`"
+    }
+    work_count: {
+      h: "Work Count"
+      n: "work_count"
+      r: false
+      sh: "Number of works by this author"
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "author"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /search/authors.json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "twain"
+                k: "query"
+                n: "q"
+                or: "q"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/authors.json"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "q"
+            ]
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "authors.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.docs`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,259 @@
+# Entity: search
+
+main: kit: entity: search: {
+
+  alias: field: {}
+
+  fields: {
+    author_key: {
+      h: "Author Key"
+      n: "author_key"
+      r: false
+      sh: "List of Open Library author keys"
+      t: "`$ARRAY`"
+    }
+    author_name: {
+      h: "Author Name"
+      n: "author_name"
+      r: false
+      sh: "List of author names"
+      t: "`$ARRAY`"
+    }
+    cover_i: {
+      h: "Cover I"
+      n: "cover_i"
+      r: false
+      sh: "Cover image ID"
+      t: "`$INTEGER`"
+    }
+    edition_count: {
+      h: "Edition Count"
+      n: "edition_count"
+      r: false
+      sh: "Number of editions for this work"
+      t: "`$INTEGER`"
+    }
+    editions: {
+      h: "Editions"
+      n: "editions"
+      r: false
+      sh: "Nested editions data when fields parameter includes editions"
+      t: "`$OBJECT`"
+    }
+    first_publish_year: {
+      h: "First Publish Year"
+      n: "first_publish_year"
+      r: false
+      sh: "Year of first publication"
+      t: "`$INTEGER`"
+    }
+    has_fulltext: {
+      h: "Has Fulltext"
+      n: "has_fulltext"
+      r: false
+      sh: "Whether full text is available"
+      t: "`$BOOLEAN`"
+    }
+    ia: {
+      h: "Ia"
+      n: "ia"
+      r: false
+      sh: "Internet Archive identifiers"
+      t: "`$ARRAY`"
+    }
+    isbn: {
+      h: "Isbn"
+      n: "isbn"
+      r: false
+      sh: "List of ISBNs"
+      t: "`$ARRAY`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: false
+      sh: "Open Library work key"
+      t: "`$STRING`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      sh: "List of language codes"
+      t: "`$ARRAY`"
+    }
+    public_scan_b: {
+      h: "Public Scan B"
+      n: "public_scan_b"
+      r: false
+      sh: "Whether public scans are available"
+      t: "`$BOOLEAN`"
+    }
+    publisher: {
+      h: "Publisher"
+      n: "publisher"
+      r: false
+      sh: "List of publishers"
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      sh: "Title of the book"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "search"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /search.json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "tolkien"
+                k: "query"
+                n: "author"
+                or: "author"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "ebook_access"
+                or: "ebook_access"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "key,title,author_name,editions"
+                k: "query"
+                n: "field"
+                or: "field"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "has_fulltext"
+                or: "has_fulltext"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "en"
+                k: "query"
+                n: "lang"
+                or: "lang"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "eng"
+                k: "query"
+                n: "language"
+                or: "language"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "publisher"
+                or: "publisher"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "the lord of the rings"
+                k: "query"
+                n: "q"
+                or: "q"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "new"
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "the lord of the rings"
+                k: "query"
+                n: "title"
+                or: "title"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search.json"
+          q: {
+            exist: [
+              "author"
+              "ebook_access"
+              "field"
+              "has_fulltext"
+              "lang"
+              "language"
+              "limit"
+              "offset"
+              "page"
+              "publisher"
+              "q"
+              "sort"
+              "title"
+            ]
+          }
+          s: [
+            {
+              lit: "search.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.docs`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

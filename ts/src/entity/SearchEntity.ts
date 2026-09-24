@@ -19,7 +19,6 @@ import type {
   SearchListMatch,
 } from '../OpenLibrarySearchTypes'
 
-// TODO: needs Entity superclass
 class SearchEntity extends OpenLibrarySearchEntityBase<Search> {
 
   constructor(client: OpenLibrarySearchSDK, entopts: any) {

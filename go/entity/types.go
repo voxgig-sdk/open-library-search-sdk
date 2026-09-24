@@ -1,7 +1,7 @@
 // Typed models for the OpenLibrarySearch SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,13 +14,6 @@ import (
 
 // Author is the typed data model for the author entity.
 type Author struct {
-	BirthDate *string `json:"birth_date,omitempty"`
-	DeathDate *string `json:"death_date,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TopSubjects *[]any `json:"top_subjects,omitempty"`
-	TopWork *string `json:"top_work,omitempty"`
-	WorkCount *int `json:"work_count,omitempty"`
 }
 
 // AuthorListMatch is the typed request payload for Author.ListTyped.
@@ -32,20 +25,6 @@ type AuthorListMatch struct {
 
 // Search is the typed data model for the search entity.
 type Search struct {
-	AuthorKey *[]any `json:"author_key,omitempty"`
-	AuthorName *[]any `json:"author_name,omitempty"`
-	CoverI *int `json:"cover_i,omitempty"`
-	EditionCount *int `json:"edition_count,omitempty"`
-	Editions *map[string]any `json:"editions,omitempty"`
-	FirstPublishYear *int `json:"first_publish_year,omitempty"`
-	HasFulltext *bool `json:"has_fulltext,omitempty"`
-	Ia *[]any `json:"ia,omitempty"`
-	Isbn *[]any `json:"isbn,omitempty"`
-	Key *string `json:"key,omitempty"`
-	Language *[]any `json:"language,omitempty"`
-	PublicScanB *bool `json:"public_scan_b,omitempty"`
-	Publisher *[]any `json:"publisher,omitempty"`
-	Title *string `json:"title,omitempty"`
 }
 
 // SearchListMatch is the typed request payload for Search.ListTyped.
