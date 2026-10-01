@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 OpenLibrarySearchUtility.registrar = ->(u) {
   u.clean = OpenLibrarySearchUtilities::Clean
+  u.clean_add = OpenLibrarySearchUtilities::CleanAdd
+  u.clean_explain = OpenLibrarySearchUtilities::CleanExplain
   u.done = OpenLibrarySearchUtilities::Done
   u.make_error = OpenLibrarySearchUtilities::MakeError
   u.feature_add = OpenLibrarySearchUtilities::FeatureAdd

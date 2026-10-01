@@ -344,7 +344,7 @@ class Config {
                                     },
                                     {
                                         "name": "field",
-                                        "orig": "field",
+                                        "orig": "fields",
                                         "type": "`$STRING`",
                                         "kind": "query",
                                         "example": "key,title,author_name,editions"

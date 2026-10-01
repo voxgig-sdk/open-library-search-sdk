@@ -328,7 +328,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "field",
-											"orig": "field",
+											"orig": "fields",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "key,title,author_name,editions",

@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 OpenLibrarySearchUtility::setRegistrar(function (OpenLibrarySearchUtility $u): void {
     $u->clean = [OpenLibrarySearchClean::class, 'call'];
+    $u->clean_add = [OpenLibrarySearchClean::class, 'add'];
+    $u->clean_explain = [OpenLibrarySearchDone::class, 'clean_explain'];
     $u->done = [OpenLibrarySearchDone::class, 'call'];
     $u->make_error = [OpenLibrarySearchMakeError::class, 'call'];
     $u->feature_add = [OpenLibrarySearchFeatureAdd::class, 'call'];
