@@ -1,10 +1,14 @@
 # open-library-search-mcp
 
 [MCP](https://modelcontextprotocol.io) server exposing the OpenLibrarySearch SDK as
-two agent tools — `open-library-search_list` and `open-library-search_load` — built on the
+1 agent tool, `open-library-search_list`, built on the
 [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and the
 sibling Go SDK at `../go`. Runs over **stdio** (default, for spawnable installs)
 or **streamable HTTP** (one shared server for several agents).
+
+The server only reads. Create, update, patch and remove become tools too when the
+SDK's own model sets `main: kit: target: 'go-mcp': tool: write: true`; they are off by default, as an agent calling
+them changes the API's data.
 
 ## Examples
 
@@ -27,11 +31,7 @@ Tool-call arguments (what an agent sends):
 
 ```jsonc
 // open-library-search_list: first page of records
-{ "entity": "author" }
-{ "entity": "author", "query": { } }
-
-// open-library-search_load: one record by id
-{ "entity": "author", "query": { "id": 1 } }
+{ "entity": "author", "query": { "q": "example" } }
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -59,9 +59,9 @@ Tool-call arguments (what an agent sends):
      -- "$PWD"/dist/*/open-library-search-mcp -transport stdio
    ```
 
-4. **Restart Claude Code.** The `open-library-search_list` and `open-library-search_load` tools now appear
-   in new sessions. Ask the agent to *"list author using open-library-search"*
-   and it calls `open-library-search_list` with `{"entity":"author"}`.
+4. **Restart Claude Code.** The `open-library-search_list` tool now appear in new
+   sessions. Ask the agent to *"list author using open-library-search"*
+   and it calls `open-library-search_list` with `{"entity":"author","query":{"q":"example"}}`.
 
 ## How-to guides
 
@@ -88,20 +88,19 @@ default) spawns a fresh process per client.
 
 ### Call the `open-library-search_list` tool
 
-Args: `entity` (required), `query` (optional filter map). Returns the first
-page of records as JSON:
+Args: `entity` (required), `query` (optional: optional filter map; omit it for the first page).
+Returns the first page of records as JSON:
 
 ```jsonc
-{ "entity": "author" }
+{ "entity": "author", "query": { "q": "example" } }
 ```
 
-### Call the `open-library-search_load` tool
+### Turn on the write tools
 
-Args: `entity` (required), `query` = `{"id":N}` (required). Returns the single
-record as JSON:
+In the SDK's own model (`.sdk/model/sdk.aontu`), then regenerate:
 
-```jsonc
-{ "entity": "author", "query": { "id": 1 } }
+```
+main: kit: target: 'go-mcp': tool: write: true
 ```
 
 ### Cross-compile release binaries
@@ -115,25 +114,26 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 
 ### Tools
 
-| Tool | Args | Returns |
-|------|------|---------|
-| `open-library-search_list` | `entity` (required), `query` (optional map) | First page of records as JSON |
-| `open-library-search_load` | `entity` (required), `query` = `{id:N}` | Single record as JSON |
+| Tool | Args | Returns | MCP hints |
+|------|------|---------|-----------|
+| `open-library-search_list` | `entity`, `query` (optional map) | The first page of records as JSON | read-only |
 
 On error, a tool returns an MCP error result (`isError: true`) whose text is the
 failure message (e.g. unknown entity, or an API error).
 
-### `Args` schema
+### Entities
 
-Both tools take the same argument object:
+Each tool takes as its `entity` argument one of the entities that has its
+operation, of the 2 the SDK has:
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `entity` | string | One of the 2 supported entities (see below). |
-| `query` | object | Optional match map. `{"id":N}` for load; omit or `{}` for list. |
+| Tool | Entities |
+|------|----------|
+| `open-library-search_list` | author, search |
 
-JSON schemas are emitted by the SDK from the `Args` struct's `json` /
-`jsonschema` tags — no schema is hand-written.
+JSON schemas are emitted by the SDK from each tool's argument struct's
+`json` / `jsonschema` tags — no schema is hand-written. Each tool's
+`entity` is an `enum` of the entities in its row, so the server refuses
+any other before it runs a call.
 
 ### Transports & flags
 
@@ -148,12 +148,6 @@ JSON schemas are emitted by the SDK from the `Args` struct's `json` /
 |----------|---------|
 | `OPEN_LIBRARY_SEARCH_APIKEY` | API key sent with every request. |
 | `OPEN_LIBRARY_SEARCH_BASE` | Optional override of the API base URL. |
-
-### Entities
-
-The 2 entities valid as the `entity` argument:
-
-author | search
 
 ### Smoke test via HTTP (raw JSON-RPC)
 
@@ -173,7 +167,7 @@ curl -sN -X POST http://localhost:18080 \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json, text/event-stream' \
   -H "Mcp-Session-Id: $SESSION" \
-  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"open-library-search_load","arguments":{"entity":"author","query":{"id":1}}}}'
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"open-library-search_list","arguments":{"entity":"author","query":{"q":"example"}}}}'
 ```
 
 ## Explanation
@@ -181,9 +175,10 @@ curl -sN -X POST http://localhost:18080 \
 ### How tools map to the SDK
 
 `main.go` builds the SDK client (configured from the environment) and registers
-two tools. Each dispatches on the `entity` argument to the matching entity in
-the sibling Go SDK at `../go`, calls `List` or `Load`, unwraps the `Entity`
-wrappers to plain data, and returns it as pretty-printed JSON.
+one tool per operation the SDK's entities have. Each dispatches on the
+`entity` argument to the matching entity in the sibling Go SDK at `../go`,
+calls its operation, unwraps the `Entity` wrappers to plain data, and returns
+it as pretty-printed JSON.
 
 ### Why two transports
 
@@ -193,9 +188,10 @@ that many agents can share — handy for a long-lived deployment.
 
 ### Schema generation
 
-The input schema is derived from the `Args` Go struct's `json` / `jsonschema`
-tags at registration time, so the advertised tool schema can never drift from
-the code that consumes it.
+The input schema is derived from each tool's argument struct's `json` /
+`jsonschema` tags at registration time, so the advertised tool schema can
+never drift from the code that consumes it. The `entity` enum comes from the
+same list the tool is registered for.
 
 ## Generated by
 

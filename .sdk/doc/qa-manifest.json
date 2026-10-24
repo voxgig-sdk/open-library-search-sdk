@@ -3,5 +3,23 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Author birth date",
+      "Author death date",
+      "Author name",
+      "Cover image ID",
+      "List of Open Library author keys",
+      "List of author names",
+      "Nested editions data when fields parameter includes editions",
+      "Number of editions for this work",
+      "Open Library author key",
+      "Open Library provides an experimental API to search for book data. It can return data for multiple books in a single request, including Work and Edition level information, author IDs, book availability, and offers powerful sorting options.",
+      "Production server",
+      "Successful author search response",
+      "Successful search response",
+      "Top subjects associated with this author"
+    ]
+  }
 }

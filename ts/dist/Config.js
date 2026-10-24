@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -204,10 +205,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "limit",
-                                    "offset",
                                     "q"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -353,7 +356,8 @@ class Config {
                                         "name": "has_fulltext",
                                         "orig": "has_fulltext",
                                         "type": "`$BOOLEAN`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     },
                                     {
                                         "name": "lang",
@@ -367,7 +371,8 @@ class Config {
                                         "orig": "language",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "example": "eng"
+                                        "example": "eng",
+                                        "field": true
                                     },
                                     {
                                         "name": "limit",
@@ -394,7 +399,8 @@ class Config {
                                         "name": "publisher",
                                         "orig": "publisher",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     },
                                     {
                                         "name": "q",
@@ -415,26 +421,15 @@ class Config {
                                         "orig": "title",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "example": "the lord of the rings"
+                                        "example": "the lord of the rings",
+                                        "field": true
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "author",
-                                    "ebook_access",
-                                    "field",
-                                    "has_fulltext",
-                                    "lang",
-                                    "language",
-                                    "limit",
-                                    "offset",
-                                    "page",
-                                    "publisher",
-                                    "q",
-                                    "sort",
-                                    "title"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

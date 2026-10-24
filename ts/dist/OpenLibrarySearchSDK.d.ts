@@ -8,6 +8,19 @@ import { OpenLibrarySearchEntityBase } from './OpenLibrarySearchEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class OpenLibrarySearchSDK {
     _mode: string;
     _options: any;
@@ -18,32 +31,8 @@ declare class OpenLibrarySearchSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Author(entopts?: Record<string, any>): AuthorEntity;
     Search(entopts?: Record<string, any>): SearchEntity;
@@ -57,3 +46,4 @@ declare class OpenLibrarySearchSDK {
 }
 declare const SDK: typeof OpenLibrarySearchSDK;
 export { stdutil, config, BaseFeature, OpenLibrarySearchEntityBase, OpenLibrarySearchSDK, SDK, };
+export type { DirectResult };

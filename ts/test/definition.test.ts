@@ -16,15 +16,33 @@ const PLAN: any[] = [
     "path": "/search/authors.json",
     "args": [],
     "select": {
-      "limit": "v1",
-      "offset": "v1",
-      "q": "twain"
+      "q": "twain",
+      "limit": 10,
+      "offset": 0
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "q",
       "offset",
       "limit"
+    ],
+    "queryArgs": [
+      {
+        "name": "limit",
+        "wire": "limit"
+      },
+      {
+        "name": "offset",
+        "wire": "offset"
+      },
+      {
+        "name": "q",
+        "wire": "q"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -34,15 +52,15 @@ const PLAN: any[] = [
       "numFoundExact": true,
       "docs": [
         {
-          "birth_date": "x",
-          "death_date": "x",
           "key": "x",
           "name": "x",
+          "birth_date": "x",
+          "death_date": "x",
+          "work_count": 1,
+          "top_work": "x",
           "top_subjects": [
             "x"
-          ],
-          "top_work": "x",
-          "work_count": 1
+          ]
         }
       ]
     },
@@ -58,19 +76,23 @@ const PLAN: any[] = [
     "select": {
       "author": "tolkien",
       "ebook_access": "v1",
-      "field": "v1",
+      "field": "key,title,author_name,editions",
       "has_fulltext": "v1",
       "lang": "en",
       "language": "eng",
-      "limit": "v1",
-      "offset": "v1",
-      "page": "v1",
+      "limit": 10,
+      "offset": 0,
+      "page": 1,
       "publisher": "v1",
       "q": "the lord of the rings",
       "sort": "new",
       "title": "the lord of the rings"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "q",
       "title",
@@ -85,6 +107,60 @@ const PLAN: any[] = [
       "language",
       "has_fulltext",
       "ebook_access"
+    ],
+    "queryArgs": [
+      {
+        "name": "author",
+        "wire": "author"
+      },
+      {
+        "name": "ebook_access",
+        "wire": "ebook_access"
+      },
+      {
+        "name": "field",
+        "wire": "fields"
+      },
+      {
+        "name": "has_fulltext",
+        "wire": "has_fulltext"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      },
+      {
+        "name": "language",
+        "wire": "language"
+      },
+      {
+        "name": "limit",
+        "wire": "limit"
+      },
+      {
+        "name": "offset",
+        "wire": "offset"
+      },
+      {
+        "name": "page",
+        "wire": "page"
+      },
+      {
+        "name": "publisher",
+        "wire": "publisher"
+      },
+      {
+        "name": "q",
+        "wire": "q"
+      },
+      {
+        "name": "sort",
+        "wire": "sort"
+      },
+      {
+        "name": "title",
+        "wire": "title"
+      }
     ],
     "auth": null,
     "status": 200,

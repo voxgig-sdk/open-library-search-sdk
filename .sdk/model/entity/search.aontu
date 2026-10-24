@@ -223,22 +223,9 @@ main: kit: entity: search: {
           }
           m: "GET"
           o: "/search.json"
-          q: {
-            exist: [
-              "author"
-              "ebook_access"
-              "field"
-              "has_fulltext"
-              "lang"
-              "language"
-              "limit"
-              "offset"
-              "page"
-              "publisher"
-              "q"
-              "sort"
-              "title"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

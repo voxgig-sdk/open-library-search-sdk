@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { OpenLibrarySearchSDK, BaseFeature, stdutil } from '../../..'
+import { OpenLibrarySearchSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('SearchEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('search hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of OpenLibrarySearchSDK.test(offline).Search().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of OpenLibrarySearchSDK.test(offline).Search()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = OpenLibrarySearchSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Search().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of OpenLibrarySearchSDK.test().Search().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new OpenLibrarySearchSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Search().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Search().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = OpenLibrarySearchSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Search().list({"author":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.OPEN_LIBRARY_SEARCH_TEST_LIVE
@@ -51,7 +109,7 @@ describe('SearchEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"author_key":{"a":true,"h":"Author Key","n":"author_key","r":false,"sh":"List of Open Library author keys","t":"`$ARRAY`","key$":"author_key","index$":0},"author_name":{"a":true,"h":"Author Name","n":"author_name","r":false,"sh":"List of author names","t":"`$ARRAY`","key$":"author_name","index$":1},"cover_i":{"a":true,"h":"Cover I","n":"cover_i","r":false,"sh":"Cover image ID","t":"`$INTEGER`","key$":"cover_i","index$":2},"edition_count":{"a":true,"h":"Edition Count","n":"edition_count","r":false,"sh":"Number of editions for this work","t":"`$INTEGER`","key$":"edition_count","index$":3},"editions":{"a":true,"h":"Editions","n":"editions","r":false,"sh":"Nested editions data when fields parameter includes editions","t":"`$OBJECT`","key$":"editions","index$":4},"first_publish_year":{"a":true,"h":"First Publish Year","n":"first_publish_year","r":false,"sh":"Year of first publication","t":"`$INTEGER`","key$":"first_publish_year","index$":5},"has_fulltext":{"a":true,"h":"Has Fulltext","n":"has_fulltext","r":false,"sh":"Whether full text is available","t":"`$BOOLEAN`","key$":"has_fulltext","index$":6},"ia":{"a":true,"h":"Ia","n":"ia","r":false,"sh":"Internet Archive identifiers","t":"`$ARRAY`","key$":"ia","index$":7},"isbn":{"a":true,"h":"Isbn","n":"isbn","r":false,"sh":"List of ISBNs","t":"`$ARRAY`","key$":"isbn","index$":8},"key":{"a":true,"h":"Key","n":"key","r":false,"sh":"Open Library work key","t":"`$STRING`","key$":"key","index$":9},"language":{"a":true,"h":"Language","n":"language","r":false,"sh":"List of language codes","t":"`$ARRAY`","key$":"language","index$":10},"public_scan_b":{"a":true,"h":"Public Scan B","n":"public_scan_b","r":false,"sh":"Whether public scans are available","t":"`$BOOLEAN`","key$":"public_scan_b","index$":11},"publisher":{"a":true,"h":"Publisher","n":"publisher","r":false,"sh":"List of publishers","t":"`$ARRAY`","key$":"publisher","index$":12},"title":{"a":true,"h":"Title","n":"title","r":false,"sh":"Title of the book","t":"`$STRING`","key$":"title","index$":13}},"name":"search","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /search.json","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"tolkien","k":"query","n":"author","or":"author","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"ebook_access","or":"ebook_access","r":false,"t":"`$STRING`","index$":1},{"a":true,"ex":"key,title,author_name,editions","k":"query","n":"field","or":"fields","r":false,"t":"`$STRING`","index$":2},{"a":true,"k":"query","n":"has_fulltext","or":"has_fulltext","r":false,"t":"`$BOOLEAN`","index$":3},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":4},{"a":true,"ex":"eng","k":"query","n":"language","or":"language","r":false,"t":"`$STRING`","index$":5},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":6},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":7},{"a":true,"ex":1,"k":"query","n":"page","or":"page","r":false,"t":"`$INTEGER`","index$":8},{"a":true,"k":"query","n":"publisher","or":"publisher","r":false,"t":"`$STRING`","index$":9},{"a":true,"ex":"the lord of the rings","k":"query","n":"q","or":"q","r":false,"t":"`$STRING`","index$":10},{"a":true,"ex":"new","k":"query","n":"sort","or":"sort","r":false,"t":"`$STRING`","index$":11},{"a":true,"ex":"the lord of the rings","k":"query","n":"title","or":"title","r":false,"t":"`$STRING`","index$":12}]},"k":"http","m":"GET","o":"/search.json","q":{"exist":["author","ebook_access","field","has_fulltext","lang","language","limit","offset","page","publisher","q","sort","title"]},"r":{},"s":[{"lit":"search.json"}],"t":{"req":"`reqdata`","res":"`body.docs`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"search","name__orig":"search","Name":"Search","name_":"search","name-":"search","NAME":"SEARCH","index$":1}, {"active":true,"entity":"search","key$":"BasicSearchFlow","kind":"basic","name":"BasicSearchFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"search_ref01"}}],"index$":0}]}, 'Search', {"GET /search.json":{"protocol":"http","parameters":[{"name":"q","in":"query","description":"The solr query. General search term for books.","required":false,"schema":{"type":"string"},"example":"the lord of the rings","index$":0},{"name":"title","in":"query","description":"Search by book title","required":false,"schema":{"type":"string"},"example":"the lord of the rings","index$":1},{"name":"author","in":"query","description":"Search by author name","required":false,"schema":{"type":"string"},"example":"tolkien","index$":2},{"name":"fields","in":"query","description":"Comma-separated list of fields to return from solr. Use * to fetch all fields. Add 'availability' to fetch availability data from archive.org. Can also specify edition fields like 'editions.key,editions.title'.","required":false,"schema":{"type":"string"},"example":"key,title,author_name,editions","index$":3},{"name":"sort","in":"query","description":"Sort results by various facets such as 'new', 'old', 'random', or 'key'. Default is relevance.","required":false,"schema":{"type":"string","enum":["new","old","random","key","relevance"]},"example":"new","index$":4},{"name":"lang","in":"query","description":"Two letter ISO 639-1 language code. Influences but doesn't exclude search results by preferring editions in this language.","required":false,"schema":{"type":"string","pattern":"^[a-z]{2}$"},"example":"en","index$":5},{"name":"offset","in":"query","description":"Number of results to skip for pagination.","required":false,"schema":{"type":"integer","minimum":0,"default":0},"index$":6},{"name":"limit","in":"query","description":"Maximum number of results to return (page size).","required":false,"schema":{"type":"integer","minimum":1,"maximum":100,"default":10},"index$":7},{"name":"page","in":"query","description":"Page number for pagination (starts at 1). Use with 'limit' parameter.","required":false,"schema":{"type":"integer","minimum":1,"default":1},"index$":8},{"name":"publisher","in":"query","description":"Filter by publisher name","required":false,"schema":{"type":"string"},"index$":9},{"name":"language","in":"query","description":"Filter by language code (e.g., 'fre' for French, 'eng' for English)","required":false,"schema":{"type":"string"},"example":"eng","index$":10},{"name":"has_fulltext","in":"query","description":"Filter for books with full text available","required":false,"schema":{"type":"boolean"},"index$":11},{"name":"ebook_access","in":"query","description":"Filter by ebook access type","required":false,"schema":{"type":"string"},"index$":12}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"author_key":{"a":true,"h":"Author Key","n":"author_key","r":false,"sh":"List of Open Library author keys","t":"`$ARRAY`","key$":"author_key","index$":0},"author_name":{"a":true,"h":"Author Name","n":"author_name","r":false,"sh":"List of author names","t":"`$ARRAY`","key$":"author_name","index$":1},"cover_i":{"a":true,"h":"Cover I","n":"cover_i","r":false,"sh":"Cover image ID","t":"`$INTEGER`","key$":"cover_i","index$":2},"edition_count":{"a":true,"h":"Edition Count","n":"edition_count","r":false,"sh":"Number of editions for this work","t":"`$INTEGER`","key$":"edition_count","index$":3},"editions":{"a":true,"h":"Editions","n":"editions","r":false,"sh":"Nested editions data when fields parameter includes editions","t":"`$OBJECT`","key$":"editions","index$":4},"first_publish_year":{"a":true,"h":"First Publish Year","n":"first_publish_year","r":false,"sh":"Year of first publication","t":"`$INTEGER`","key$":"first_publish_year","index$":5},"has_fulltext":{"a":true,"h":"Has Fulltext","n":"has_fulltext","r":false,"sh":"Whether full text is available","t":"`$BOOLEAN`","key$":"has_fulltext","index$":6},"ia":{"a":true,"h":"Ia","n":"ia","r":false,"sh":"Internet Archive identifiers","t":"`$ARRAY`","key$":"ia","index$":7},"isbn":{"a":true,"h":"Isbn","n":"isbn","r":false,"sh":"List of ISBNs","t":"`$ARRAY`","key$":"isbn","index$":8},"key":{"a":true,"h":"Key","n":"key","r":false,"sh":"Open Library work key","t":"`$STRING`","key$":"key","index$":9},"language":{"a":true,"h":"Language","n":"language","r":false,"sh":"List of language codes","t":"`$ARRAY`","key$":"language","index$":10},"public_scan_b":{"a":true,"h":"Public Scan B","n":"public_scan_b","r":false,"sh":"Whether public scans are available","t":"`$BOOLEAN`","key$":"public_scan_b","index$":11},"publisher":{"a":true,"h":"Publisher","n":"publisher","r":false,"sh":"List of publishers","t":"`$ARRAY`","key$":"publisher","index$":12},"title":{"a":true,"h":"Title","n":"title","r":false,"sh":"Title of the book","t":"`$STRING`","key$":"title","index$":13}},"name":"search","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /search.json","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"tolkien","k":"query","n":"author","or":"author","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"ebook_access","or":"ebook_access","r":false,"t":"`$STRING`","index$":1},{"a":true,"ex":"key,title,author_name,editions","k":"query","n":"field","or":"fields","r":false,"t":"`$STRING`","index$":2},{"a":true,"k":"query","n":"has_fulltext","or":"has_fulltext","r":false,"t":"`$BOOLEAN`","index$":3},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":4},{"a":true,"ex":"eng","k":"query","n":"language","or":"language","r":false,"t":"`$STRING`","index$":5},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":6},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":7},{"a":true,"ex":1,"k":"query","n":"page","or":"page","r":false,"t":"`$INTEGER`","index$":8},{"a":true,"k":"query","n":"publisher","or":"publisher","r":false,"t":"`$STRING`","index$":9},{"a":true,"ex":"the lord of the rings","k":"query","n":"q","or":"q","r":false,"t":"`$STRING`","index$":10},{"a":true,"ex":"new","k":"query","n":"sort","or":"sort","r":false,"t":"`$STRING`","index$":11},{"a":true,"ex":"the lord of the rings","k":"query","n":"title","or":"title","r":false,"t":"`$STRING`","index$":12}]},"k":"http","m":"GET","o":"/search.json","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"search.json"}],"t":{"req":"`reqdata`","res":"`body.docs`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"search","name__orig":"search","Name":"Search","name_":"search","name-":"search","NAME":"SEARCH","index$":1}, {"active":true,"entity":"search","key$":"BasicSearchFlow","kind":"basic","name":"BasicSearchFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"search_ref01"}}],"index$":0}]}, 'Search', {"GET /search.json":{"protocol":"http","parameters":[{"name":"q","in":"query","description":"The solr query. General search term for books.","required":false,"schema":{"type":"string"},"example":"the lord of the rings","index$":0},{"name":"title","in":"query","description":"Search by book title","required":false,"schema":{"type":"string"},"example":"the lord of the rings","index$":1},{"name":"author","in":"query","description":"Search by author name","required":false,"schema":{"type":"string"},"example":"tolkien","index$":2},{"name":"fields","in":"query","description":"Comma-separated list of fields to return from solr. Use * to fetch all fields. Add 'availability' to fetch availability data from archive.org. Can also specify edition fields like 'editions.key,editions.title'.","required":false,"schema":{"type":"string"},"example":"key,title,author_name,editions","index$":3},{"name":"sort","in":"query","description":"Sort results by various facets such as 'new', 'old', 'random', or 'key'. Default is relevance.","required":false,"schema":{"type":"string","enum":["new","old","random","key","relevance"]},"example":"new","index$":4},{"name":"lang","in":"query","description":"Two letter ISO 639-1 language code. Influences but doesn't exclude search results by preferring editions in this language.","required":false,"schema":{"type":"string","pattern":"^[a-z]{2}$"},"example":"en","index$":5},{"name":"offset","in":"query","description":"Number of results to skip for pagination.","required":false,"schema":{"type":"integer","minimum":0,"default":0},"index$":6},{"name":"limit","in":"query","description":"Maximum number of results to return (page size).","required":false,"schema":{"type":"integer","minimum":1,"maximum":100,"default":10},"index$":7},{"name":"page","in":"query","description":"Page number for pagination (starts at 1). Use with 'limit' parameter.","required":false,"schema":{"type":"integer","minimum":1,"default":1},"index$":8},{"name":"publisher","in":"query","description":"Filter by publisher name","required":false,"schema":{"type":"string"},"index$":9},{"name":"language","in":"query","description":"Filter by language code (e.g., 'fre' for French, 'eng' for English)","required":false,"schema":{"type":"string"},"example":"eng","index$":10},{"name":"has_fulltext","in":"query","description":"Filter for books with full text available","required":false,"schema":{"type":"boolean"},"index$":11},{"name":"ebook_access","in":"query","description":"Filter by ebook access type","required":false,"schema":{"type":"string"},"index$":12}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('SearchEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

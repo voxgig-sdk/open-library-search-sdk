@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -188,10 +189,12 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"limit",
-										"offset",
 										"q",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -338,6 +341,7 @@ func MakeConfig() map[string]any {
 											"orig": "has_fulltext",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "lang",
@@ -352,6 +356,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "eng",
+											"field": true,
 										},
 										map[string]any{
 											"name": "limit",
@@ -379,6 +384,7 @@ func MakeConfig() map[string]any {
 											"orig": "publisher",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "q",
@@ -400,25 +406,14 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "the lord of the rings",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"author",
-										"ebook_access",
-										"field",
-										"has_fulltext",
-										"lang",
-										"language",
-										"limit",
-										"offset",
-										"page",
-										"publisher",
-										"q",
-										"sort",
-										"title",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

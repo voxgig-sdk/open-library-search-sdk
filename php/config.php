@@ -93,6 +93,7 @@ class OpenLibrarySearchConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -210,10 +211,12 @@ class OpenLibrarySearchConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'limit',
-                      'offset',
                       'q',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -360,6 +363,7 @@ class OpenLibrarySearchConfig
                         'orig' => 'has_fulltext',
                         'type' => '`$BOOLEAN`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                       [
                         'name' => 'lang',
@@ -374,6 +378,7 @@ class OpenLibrarySearchConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'example' => 'eng',
+                        'field' => true,
                       ],
                       [
                         'name' => 'limit',
@@ -401,6 +406,7 @@ class OpenLibrarySearchConfig
                         'orig' => 'publisher',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                       [
                         'name' => 'q',
@@ -422,25 +428,14 @@ class OpenLibrarySearchConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'example' => 'the lord of the rings',
+                        'field' => true,
                       ],
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'author',
-                      'ebook_access',
-                      'field',
-                      'has_fulltext',
-                      'lang',
-                      'language',
-                      'limit',
-                      'offset',
-                      'page',
-                      'publisher',
-                      'q',
-                      'sort',
-                      'title',
-                    ],
+                  'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

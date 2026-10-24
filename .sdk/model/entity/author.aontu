@@ -99,10 +99,12 @@ main: kit: entity: author: {
           o: "/search/authors.json"
           q: {
             exist: [
-              "limit"
-              "offset"
               "q"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

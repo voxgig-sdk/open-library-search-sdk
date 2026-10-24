@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -184,10 +185,12 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "limit",
-                    "offset",
                     "q",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -334,6 +337,7 @@ local function make_config()
                       ["orig"] = "has_fulltext",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "lang",
@@ -348,6 +352,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["example"] = "eng",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "limit",
@@ -375,6 +380,7 @@ local function make_config()
                       ["orig"] = "publisher",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "q",
@@ -396,25 +402,14 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["example"] = "the lord of the rings",
+                      ["field"] = true,
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "author",
-                    "ebook_access",
-                    "field",
-                    "has_fulltext",
-                    "lang",
-                    "language",
-                    "limit",
-                    "offset",
-                    "page",
-                    "publisher",
-                    "q",
-                    "sort",
-                    "title",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

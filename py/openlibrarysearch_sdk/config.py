@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -213,10 +214,12 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "limit",
-                    "offset",
                     "q",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -363,6 +366,7 @@ def make_config():
                       "orig": "has_fulltext",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "lang",
@@ -377,6 +381,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "example": "eng",
+                      "field": True,
                     },
                     {
                       "name": "limit",
@@ -404,6 +409,7 @@ def make_config():
                       "orig": "publisher",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "q",
@@ -425,25 +431,14 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "example": "the lord of the rings",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "author",
-                    "ebook_access",
-                    "field",
-                    "has_fulltext",
-                    "lang",
-                    "language",
-                    "limit",
-                    "offset",
-                    "page",
-                    "publisher",
-                    "q",
-                    "sort",
-                    "title",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
